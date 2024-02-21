@@ -77,3 +77,4 @@ export const GlobalStyle = createGlobalStyle<Props>`
     list-style: none;
   }
 `;
+
