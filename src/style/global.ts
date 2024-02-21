@@ -3,7 +3,7 @@ import { ThemeName } from './theme';
 import '@noonnu/pretendard-regular';
 
 interface Props {
-	themeName: ThemeName;
+  themeName: ThemeName;
 }
 
 export const GlobalStyle = createGlobalStyle<Props>`
@@ -77,4 +77,3 @@ export const GlobalStyle = createGlobalStyle<Props>`
     list-style: none;
   }
 `;
-

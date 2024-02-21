@@ -5,17 +5,16 @@ import { GlobalStyle } from './style/global';
 import { light, dark } from './style/theme';
 
 function App() {
-	return (
-		<div className='App'>
-			<BrowserRouter>
-				<GlobalStyle themeName='light' />
-				<ThemeProvider theme={light}>
-					<Router />
-				</ThemeProvider>
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <GlobalStyle themeName="light" />
+        <ThemeProvider theme={light}>
+          <Router />
+        </ThemeProvider>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
-
