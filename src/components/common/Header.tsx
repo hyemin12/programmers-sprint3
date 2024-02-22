@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
+import Logo from './Logo';
 
 const CATEGORY = [
   { id: null, name: '전체' },
@@ -13,11 +14,7 @@ const CATEGORY = [
 const Header = () => {
   return (
     <HeaderStyle>
-      <h1 className="logo">
-        <Link to="/">
-          <img src="" alt="bookstore" />
-        </Link>
-      </h1>
+      <Logo type="link" size={200} />
 
       <nav className="category">
         <ul>
@@ -69,11 +66,6 @@ const HeaderStyle = styled.header`
   padding: 20px 0;
   border-bottom: 1px solid ${({ theme }) => theme.color.background};
 
-  .logo {
-    img {
-      width: 200px;
-    }
-  }
   .category {
     ul {
       display: flex;
