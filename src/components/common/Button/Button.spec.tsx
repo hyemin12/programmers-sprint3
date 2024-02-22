@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { BookStoreThemeProvider } from '../../context/themeContext';
-import Button from './Button';
+import { BookStoreThemeProvider } from '../../../context/themeContext';
+import Button from './index';
 
 describe('Button 컴포넌트 테스트', () => {
   it('렌더 확인', () => {

@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import Router from './Router';
-import ThemeSwitcher from './components/Header/ThemeSwitcher';
+import ThemeSwitcher from './components/ThemeSwitcher';
 import { BookStoreThemeProvider } from './context/themeContext';
 
 function App() {

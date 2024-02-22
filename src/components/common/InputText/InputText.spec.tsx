@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BookStoreThemeProvider } from '../../context/themeContext';
-import InputText from './InputText';
+import { BookStoreThemeProvider } from '../../../context/themeContext';
+import InputText from './index';
 
 describe('InputText 컴포넌트 테스트', () => {
   it('렌더 확인', () => {
