@@ -5,11 +5,10 @@ import '@noonnu/pretendard-regular';
 interface Props {
   themeName: ThemeName;
 }
-
 export const GlobalStyle = createGlobalStyle<Props>`
   *{
     color:${({ themeName }) => (themeName === 'light' ? '#333' : '#fff')};
-    font-family: "Pretendard-Regular", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif ;
+    font-family: "Pretender-Regular", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif ;
   }
   /* 폰트 크기의 팽창을 방지합니다. */
   html {
@@ -26,6 +25,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
     margin:0;
     min-height: 100vh;
     line-height: 1.5;
+    background-color: ${({ themeName }) => (themeName === 'light' ? '#fff' : '#111')};
   }
   /* pico font family 초기화 */
   h1,
