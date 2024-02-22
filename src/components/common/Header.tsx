@@ -23,7 +23,7 @@ const Header = () => {
         <ul>
           {CATEGORY.map((item) => (
             <li key={item.id}>
-              <Link to={item.id ? `/books?category_id=${item.id}` : '/books'}>{item.name}</Link>
+              <Link to={item.id !== null ? `/books?category_id=${item.id}` : '/books'}>{item.name}</Link>
             </li>
           ))}
         </ul>
