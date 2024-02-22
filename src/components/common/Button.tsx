@@ -18,7 +18,7 @@ const Button = ({ children, size, scheme, disabled, isLoading }: ButtonProps) =>
   );
 };
 
-const ButtonStyle = styled.div<Omit<ButtonProps, 'children'>>`
+const ButtonStyle = styled.button<Omit<ButtonProps, 'children'>>`
   background-color: ${({ theme, scheme }) => theme.buttonScheme[scheme].backgroundColor};
   padding: ${({ theme, size }) => theme.button[size].padding};
   border: none;
