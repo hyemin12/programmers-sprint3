@@ -9,7 +9,6 @@ function App() {
       <BrowserRouter>
         <BookStoreThemeProvider>
           <ThemeSwitcher />
-
           <Router />
         </BookStoreThemeProvider>
       </BrowserRouter>
