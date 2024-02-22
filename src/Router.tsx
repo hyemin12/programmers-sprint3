@@ -1,20 +1,25 @@
 import { Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
-import GeneralLayout from './components/common/GeneralLayout';
 import Home from './pages/Home';
-import RouteError from './pages/RouteError';
+import RouteError from './components/RouteError';
+import GeneralLayout from 'components/common/GeneralLayout';
 
-const Router = () => {
-  return (
-    <Routes>
-      <Route element={<GeneralLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/books" element={<div>도서목록</div>} />
-        <Route path="/login" element={<div>로그인</div>} />
-        <Route path="/sign" element={<div>회원가입</div>} />
-        <Route path="/*" element={<RouteError />} />
-      </Route>
-    </Routes>
-  );
-};
+const routerData = [
+  {
+    path: '/',
+    element: <Home />,
+    errorElement: <RouteError />,
+  },
+  {
+    path: '/books',
+    element: <div>도서목록페이지</div>,
+  },
+];
+const router = createBrowserRouter(
+  routerData.map((route) => ({
+    path: route.path,
+    element: <GeneralLayout>{route.element}</GeneralLayout>,
+    errorElement: route.errorElement,
+  })),
+);
 
-export default Router;
+export default router;

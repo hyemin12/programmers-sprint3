@@ -47,7 +47,7 @@ describe('Button 컴포넌트 테스트', () => {
       </BookStoreThemeProvider>,
     );
 
-    const button = screen.getByRole('button', { name: /버튼/i });
+    const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
   });

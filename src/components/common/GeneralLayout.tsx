@@ -1,15 +1,13 @@
-import { Outlet } from 'react-router-dom';
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styled from 'styled-components';
 
-const GeneralLayout = () => {
+const GeneralLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
-      <LayoutStyle>
-        <Outlet />
-      </LayoutStyle>
+      <LayoutStyle>{children}</LayoutStyle>
       <Footer />
     </>
   );
