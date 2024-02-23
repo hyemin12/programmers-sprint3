@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Button from 'components/common/Button';
 import InputText from 'components/common/InputText';
 import Title from 'components/common/Title';
-import { SignUp } from 'api/auth.api';
+import { signUp } from 'api/auth.api';
 import { useAlert } from 'hooks/useAlert';
 
 export interface SignUpProps {
@@ -22,7 +22,7 @@ const SignUpPage = () => {
   } = useForm<SignUpProps>();
 
   const onSubmit = (data: SignUpProps) => {
-    SignUp(data)
+    signUp(data)
       .then((res) => {
         showAlert('회원가입이 완료되었습니다.');
         navigate('/login');
@@ -58,7 +58,7 @@ const SignUpPage = () => {
   );
 };
 
-const SignUpStyle = styled.div`
+export const SignUpStyle = styled.div`
   max-width: ${({ theme }) => theme.layout.width.small};
   margin: 80px auto;
   fieldset {

@@ -3,6 +3,7 @@ import RouteError from './components/RouteError';
 import GeneralLayout from 'components/common/GeneralLayout';
 import Home from 'pages/Home';
 import SignUp from 'pages/SignUp';
+import ResetPassword from 'pages/ResetPassword';
 
 const routerData = [
   {
@@ -17,6 +18,10 @@ const routerData = [
   {
     path: '/signup',
     element: <SignUp />,
+  },
+  {
+    path: '/reset',
+    element: <ResetPassword />,
   },
 ];
 const router = createBrowserRouter(
