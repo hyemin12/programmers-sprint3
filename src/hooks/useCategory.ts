@@ -9,7 +9,6 @@ export const useCategory = () => {
     fetchCategory().then((response) => {
       if (!response) return;
       const categoryWithAll = [{ id: null, name: '전체' }, ...response];
-      console.log(categoryWithAll);
       setCategory(categoryWithAll);
     });
   }, []);
