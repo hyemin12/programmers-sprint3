@@ -4,6 +4,7 @@ import GeneralLayout from 'components/common/GeneralLayout';
 import Home from 'pages/Home';
 import SignUp from 'pages/SignUp';
 import ResetPassword from 'pages/ResetPassword';
+import Login from 'pages/Login';
 
 const routerData = [
   {
@@ -18,6 +19,10 @@ const routerData = [
   {
     path: '/signup',
     element: <SignUp />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
   {
     path: '/reset',

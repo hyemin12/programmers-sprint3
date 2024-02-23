@@ -1,15 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { signUp } from 'api/auth.api';
 import { useAlert } from 'hooks/useAlert';
 import { AuthData } from 'models/user.model';
+import { login } from 'api/auth.api';
+import useAuthStore from 'store/auth.store';
 import AuthForm from 'components/AuthForm';
 import EmailFieldset from 'components/AuthForm/EmailFieldset';
 import PasswordFieldset from 'components/AuthForm/PasswordFieldset';
+import { useForm } from 'react-hook-form';
 
-const SignUpPage = () => {
+const Login = () => {
   const navigate = useNavigate();
   const showAlert = useAlert();
+
+  const { storeLogin } = useAuthStore();
+
   const {
     register,
     handleSubmit,
@@ -17,20 +21,21 @@ const SignUpPage = () => {
   } = useForm<AuthData>();
 
   const onSubmit = handleSubmit((data: AuthData) => {
-    signUp(data)
+    login(data)
       .then((res) => {
-        showAlert('회원가입이 완료되었습니다.');
-        navigate('/login');
+        storeLogin(res.token);
+        showAlert('로그인에 성공했습니다.');
+        navigate('/');
       })
       .catch((error) => {
-        const errorMsg = error.response.data[0].msg ?? '회원가입에 실패했습니다. 다시 시도 해주세요.';
+        const errorMsg = error.response.data.error.message ?? '로그인에 실패했습니다. 다시 시도 해주세요.';
         showAlert(errorMsg);
       });
   });
 
   return (
     <>
-      <AuthForm buttonText="회원가입" title="회원가입" onSubmit={onSubmit} showInfo="signup">
+      <AuthForm buttonText="로그인" title="로그인" onSubmit={onSubmit} showInfo="login">
         <EmailFieldset register={register} errors={errors} />
         <PasswordFieldset register={register} errors={errors} />
       </AuthForm>
@@ -38,4 +43,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default Login;
