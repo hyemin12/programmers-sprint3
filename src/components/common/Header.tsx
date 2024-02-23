@@ -4,9 +4,11 @@ import styled, { css } from 'styled-components';
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
 import Logo from './Logo';
 import { useCategory } from 'hooks/useCategory';
+import useAuthStore from 'store/auth.store';
 
 const Header = () => {
   const category = useCategory();
+  const { isLoggedIn, storeLogout } = useAuthStore();
 
   return (
     <HeaderStyle>
@@ -23,18 +25,35 @@ const Header = () => {
       </nav>
       <nav className="auth">
         <ul>
-          <li>
-            <Link to="/login">
-              <FaSignInAlt />
-              로그인
-            </Link>
-          </li>
-          <li>
-            <Link to="/signup">
-              <FaRegUser />
-              회원가입
-            </Link>
-          </li>
+          {isLoggedIn && (
+            <>
+              <li>
+                <Link to="/cart">장바구니</Link>
+              </li>
+              <li>
+                <Link to="/orderlist">주문내역</Link>
+              </li>
+              <li>
+                <button onClick={storeLogout}>로그아웃</button>
+              </li>
+            </>
+          )}
+          {!isLoggedIn && (
+            <>
+              <li>
+                <Link to="/login">
+                  <FaSignInAlt />
+                  로그인
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup">
+                  <FaRegUser />
+                  회원가입
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </HeaderStyle>
@@ -42,11 +61,13 @@ const Header = () => {
 };
 
 const NavItemStyle = css`
+  background-color: transparent;
+  border: none;
   color: ${({ theme }) => theme.color.text};
-
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s;
+  cursor: pointer;
   &:hover {
     color: ${({ theme }) => theme.color.primary};
   }
@@ -79,7 +100,8 @@ const HeaderStyle = styled.header`
       display: flex;
       gap: 16px;
       li {
-        a {
+        a,
+        button {
           ${NavItemStyle}
           font-size: 1rem;
           display: flex;
