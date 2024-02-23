@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -6,6 +5,7 @@ import Button from 'components/common/Button';
 import InputText from 'components/common/InputText';
 import Title from 'components/common/Title';
 import { SignUp } from 'api/auth.api';
+import { useAlert } from 'hooks/useAlert';
 
 export interface SignUpProps {
   email: string;
@@ -14,6 +14,7 @@ export interface SignUpProps {
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const showAlert = useAlert();
   const {
     register,
     handleSubmit,
@@ -23,14 +24,12 @@ const SignUpPage = () => {
   const onSubmit = (data: SignUpProps) => {
     SignUp(data)
       .then((res) => {
-        // 성공
-        window.alert('회원가입이 완료되었습니다.');
+        showAlert('회원가입이 완료되었습니다.');
         navigate('/login');
       })
       .catch((error) => {
-        const errorMsg = error.response.data[0].msg;
-
-        window.alert(errorMsg);
+        const errorMsg = error.response.data[0].msg ?? '회원가입에 실패했습니다. 다시 시도 해주세요.';
+        showAlert(errorMsg);
       });
   };
 
