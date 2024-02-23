@@ -1,7 +1,8 @@
 import { Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
 import RouteError from './components/RouteError';
 import GeneralLayout from 'components/common/GeneralLayout';
+import Home from 'pages/Home';
+import SignUp from 'pages/SignUp';
 
 const routerData = [
   {
@@ -12,6 +13,10 @@ const routerData = [
   {
     path: '/books',
     element: <div>도서목록페이지</div>,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
   },
 ];
 const router = createBrowserRouter(

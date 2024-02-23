@@ -3,22 +3,18 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
 import Logo from './Logo';
-
-const CATEGORY = [
-  { id: null, name: '전체' },
-  { id: 0, name: '동화' },
-  { id: 1, name: '소설' },
-  { id: 2, name: '사회' },
-];
+import { useCategory } from 'hooks/useCategory';
 
 const Header = () => {
+  const category = useCategory();
+
   return (
     <HeaderStyle>
       <Logo type="link" size={200} />
 
       <nav className="category">
         <ul>
-          {CATEGORY.map((item) => (
+          {category.map((item) => (
             <li key={item.id}>
               <Link to={item.id !== null ? `/books?category_id=${item.id}` : '/books'}>{item.name}</Link>
             </li>
