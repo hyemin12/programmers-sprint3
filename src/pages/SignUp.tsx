@@ -6,11 +6,7 @@ import InputText from 'components/common/InputText';
 import Title from 'components/common/Title';
 import { signUp } from 'api/auth.api';
 import { useAlert } from 'hooks/useAlert';
-
-export interface SignUpProps {
-  email: string;
-  password: string;
-}
+import { AuthData } from 'models/user.model';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -19,9 +15,9 @@ const SignUpPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpProps>();
+  } = useForm<AuthData>();
 
-  const onSubmit = (data: SignUpProps) => {
+  const onSubmit = (data: AuthData) => {
     signUp(data)
       .then((res) => {
         showAlert('회원가입이 완료되었습니다.');

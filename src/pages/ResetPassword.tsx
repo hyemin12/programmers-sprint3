@@ -7,11 +7,7 @@ import Button from 'components/common/Button';
 import { useAlert } from 'hooks/useAlert';
 import { SignUpStyle } from './SignUp';
 import { resetPassword, resetRequest } from 'api/auth.api';
-
-export interface ResetPasswordProps {
-  email: string;
-  password: string;
-}
+import { AuthData } from 'models/user.model';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -21,9 +17,9 @@ const ResetPassword = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ResetPasswordProps>();
+  } = useForm<AuthData>();
 
-  const onSubmit = (data: ResetPasswordProps) => {
+  const onSubmit = (data: AuthData) => {
     if (resetRequested) {
       // 초기화 함수 호출
       resetPassword(data).then(() => {
