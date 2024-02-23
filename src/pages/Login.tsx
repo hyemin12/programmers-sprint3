@@ -8,6 +8,7 @@ import Title from 'components/common/Title';
 import Button from 'components/common/Button';
 import { AuthData } from 'models/user.model';
 import { login } from 'api/auth.api';
+import useAuthStore from 'store/auth.store';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,10 +19,12 @@ const Login = () => {
     formState: { errors },
   } = useForm<AuthData>();
 
+  const { storeLogin } = useAuthStore();
+
   const onSubmit = (data: AuthData) => {
     login(data)
       .then((res) => {
-        console.log(res.token);
+        storeLogin(res.token);
         showAlert('로그인에 성공했습니다.');
         navigate('/');
       })
