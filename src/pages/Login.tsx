@@ -1,11 +1,10 @@
-import React from 'react';
 import { SignUpStyle } from './SignUp';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAlert } from 'hooks/useAlert';
 import { useForm } from 'react-hook-form';
 import InputText from 'components/common/InputText';
 import Title from 'components/common/Title';
 import Button from 'components/common/Button';
+import { useAlert } from 'hooks/useAlert';
 import { AuthData } from 'models/user.model';
 import { login } from 'api/auth.api';
 import useAuthStore from 'store/auth.store';
