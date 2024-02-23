@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaSignInAlt, FaRegUser } from 'react-icons/fa';
+import { FaSignInAlt } from 'react-icons/fa';
 import useAuthStore from 'store/auth.store';
 import { AuthNavStyle } from './Nav.styles';
 
@@ -23,20 +23,12 @@ const AuthNav = () => {
           </>
         )}
         {!isLoggedIn && (
-          <>
-            <li>
-              <Link to="/login">
-                <FaSignInAlt />
-                로그인
-              </Link>
-            </li>
-            <li>
-              <Link to="/signup">
-                <FaRegUser />
-                회원가입
-              </Link>
-            </li>
-          </>
+          <li>
+            <Link to="/login">
+              <FaSignInAlt />
+              로그인
+            </Link>
+          </li>
         )}
       </ul>
     </AuthNavStyle>
