@@ -8,8 +8,8 @@ interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const InputText = React.forwardRef(
-  ({ placeholder, inputType = 'text', onChange }: InputTextProps, ref: ForwardedRef<HTMLInputElement>) => {
-    return <InputTextStyle type={inputType} placeholder={placeholder} ref={ref} onChange={onChange} />;
+  ({ placeholder, inputType = 'text', onChange, ...props }: InputTextProps, ref: ForwardedRef<HTMLInputElement>) => {
+    return <InputTextStyle type={inputType} placeholder={placeholder} ref={ref} onChange={onChange} {...props} />;
   },
 );
 const InputTextStyle = styled.input`
