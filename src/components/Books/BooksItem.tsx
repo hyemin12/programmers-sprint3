@@ -4,14 +4,16 @@ import styled, { css } from 'styled-components';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import { FaHeart } from 'react-icons/fa';
+import { ViewMode } from './BooksViewSwitcher';
 
 interface BooksItemProps {
   book: Book;
+  view: ViewMode;
 }
 
-const BooksItem = ({ book }: BooksItemProps) => {
+const BooksItem = ({ book, view }: BooksItemProps) => {
   return (
-    <BooksItemStyle>
+    <BooksItemStyle view={view}>
       <div className="img">
         <img src={getImgSrc(book.img)} alt={book.title} />
       </div>
@@ -35,11 +37,13 @@ const textStyle = css`
   margin: 0 0 4px 0;
 `;
 
-const BooksItemStyle = styled.div`
+const BooksItemStyle = styled.div<{ view: ViewMode }>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   .img {
+    width: ${({ view }) => (view === 'grid' ? 'auto' : '165px')};
+    flex-shrink: 0;
     border-radius: ${({ theme }) => theme.borderRadius.default};
     overflow: hidden;
     img {
@@ -47,6 +51,7 @@ const BooksItemStyle = styled.div`
     }
   }
   .content {
+    flex: ${({ view }) => (view === 'grid' ? 0 : 1)};
     padding: 16px;
     position: relative;
     .title {
@@ -57,6 +62,14 @@ const BooksItemStyle = styled.div`
     .summary,
     .author {
       ${textStyle}
+    }
+    .summary {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      text-overflow: ellipsis;
+      max-height: 3em;
     }
     .price {
       ${textStyle};

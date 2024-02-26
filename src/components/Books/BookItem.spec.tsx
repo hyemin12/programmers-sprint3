@@ -24,7 +24,7 @@ describe('Book Item test!', () => {
   it('렌더 여부', () => {
     const { getByText, getByAltText } = render(
       <BookStoreThemeProvider>
-        <BooksItem book={dummyBook} />
+        <BooksItem book={dummyBook} view="grid" />
       </BookStoreThemeProvider>,
     );
     expect(getByText(dummyBook.title)).toBeInTheDocument();
