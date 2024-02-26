@@ -2,7 +2,7 @@ export type ThemeName = 'light' | 'dark';
 export type ColorKey = 'primary' | 'background' | 'secondary' | 'third' | 'border' | 'text';
 export type HeadingSize = 'large' | 'medium' | 'small';
 export type ButtonSize = 'large' | 'medium' | 'small';
-export type ButtonScheme = 'primary' | 'default';
+export type ButtonScheme = 'primary' | 'default' | 'transparent';
 export type LayoutWidth = 'large' | 'medium' | 'small';
 
 interface Theme {
@@ -21,6 +21,7 @@ interface Theme {
     [key in ButtonScheme]: {
       color: string;
       backgroundColor: string;
+      border?: string;
     };
   };
   borderRadius: {
@@ -57,6 +58,11 @@ export const light: Theme = {
     primary: {
       color: '#fff',
       backgroundColor: 'midnightblue',
+    },
+    transparent: {
+      color: '#333',
+      backgroundColor: 'transparent',
+      border: 'none',
     },
     default: {
       color: '#111',
