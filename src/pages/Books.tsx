@@ -23,7 +23,7 @@ const Books = () => {
         {books.length > 0 ? (
           <>
             <BooksList list={books} />
-            <Pagination />
+            <Pagination pagination={pagination} />
           </>
         ) : (
           <BooksEmpty />
