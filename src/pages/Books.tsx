@@ -10,7 +10,7 @@ import { useBooks } from 'hooks/useBooks';
 
 const Books = () => {
   const { books, pagination } = useBooks();
-  console.log(books, pagination);
+
   return (
     <>
       <Title size="large">도서 검색 결과</Title>
@@ -33,7 +33,7 @@ const Books = () => {
   );
 };
 
-const BookStyle = styled.div`
+export const BookStyle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;

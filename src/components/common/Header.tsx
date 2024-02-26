@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 import Logo from './Logo';
-import Nav from './Nav';
+import AuthNav from './AuthNav';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   return (
     <HeaderStyle>
-      <Logo type="link" size={200} />
-      <Nav />
+      <div className="search-wrapper">
+        <Logo type="link" size={200} />
+        <SearchBox />
+      </div>
+      <AuthNav />
     </HeaderStyle>
   );
 };
@@ -20,6 +24,11 @@ const HeaderStyle = styled.header`
   margin: 0 auto;
   padding: 20px 0;
   border-bottom: 1px solid ${({ theme }) => theme.color.background};
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
 `;
 
 export default Header;

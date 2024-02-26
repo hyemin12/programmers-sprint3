@@ -1,4 +1,4 @@
-import { Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import RouteError from './components/RouteError';
 import GeneralLayout from 'components/common/GeneralLayout';
 import Home from 'pages/Home';
@@ -6,6 +6,7 @@ import SignUp from 'pages/SignUp';
 import ResetPassword from 'pages/ResetPassword';
 import Login from 'pages/Login';
 import Books from 'pages/Books';
+import SearchBooks from 'pages/SearchBooks';
 
 const routerData = [
   {
@@ -16,6 +17,10 @@ const routerData = [
   {
     path: '/books',
     element: <Books />,
+  },
+  {
+    path: '/search',
+    element: <SearchBooks />,
   },
   {
     path: '/signup',
