@@ -79,7 +79,7 @@ const BooksItemStyle = styled.div`
     right: 16px;
     bottom: 16px;
     svg {
-      color: ${({ theme }) => theme.color.primary};
+      fill: ${({ theme }) => theme.color.primary};
     }
   }
 `;
