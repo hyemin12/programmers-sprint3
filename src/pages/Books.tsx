@@ -6,20 +6,25 @@ import BooksList from 'components/Books/BooksList';
 import BooksViewSwitcher from 'components/Books/BooksViewSwitcher';
 import Pagination from 'components/Books/Pagination';
 import Title from 'components/common/Title';
+import { useBooks } from 'hooks/useBooks';
 
 const Books = () => {
+  const { books, pagination } = useBooks();
+  console.log(books, pagination);
   return (
     <>
       <Title size="large">도서 검색 결과</Title>
       <BookStyle>
         <BooksFilter />
         <BooksViewSwitcher />
-
-        <BooksList />
-
-        <BooksEmpty />
-
-        <Pagination />
+        {books.length > 0 ? (
+          <>
+            <BooksList list={books} />
+            <Pagination />
+          </>
+        ) : (
+          <BooksEmpty />
+        )}
       </BookStyle>
     </>
   );
