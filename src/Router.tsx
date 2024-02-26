@@ -5,6 +5,7 @@ import Home from 'pages/Home';
 import SignUp from 'pages/SignUp';
 import ResetPassword from 'pages/ResetPassword';
 import Login from 'pages/Login';
+import Books from 'pages/Books';
 
 const routerData = [
   {
@@ -14,7 +15,7 @@ const routerData = [
   },
   {
     path: '/books',
-    element: <div>도서목록페이지</div>,
+    element: <Books />,
   },
   {
     path: '/signup',
