@@ -31,6 +31,18 @@ const BooksItem = ({ book, view }: BooksItemProps) => {
   );
 };
 
+/* 2줄 이상일 경우 경우 생략(...) */
+const LimitedParagraph = css`
+  /* Webkit기반 브라우저 동작 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  /* 모든 브라우저에서 동작 */
+  max-height: 3em;
+  text-overflow: ellipsis;
+`;
+
 const textStyle = css`
   font-size: 0.85rem;
   color: ${({ theme }) => theme.color.secondary};
@@ -55,6 +67,7 @@ const BooksItemStyle = styled.div<{ view: ViewMode }>`
     padding: 16px;
     position: relative;
     .title {
+      ${LimitedParagraph}
       font-size: 1.25rem;
       font-weight: bold;
       margin: 0 0 12px 0;
@@ -64,12 +77,7 @@ const BooksItemStyle = styled.div<{ view: ViewMode }>`
       ${textStyle}
     }
     .summary {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      -webkit-line-clamp: 2;
-      text-overflow: ellipsis;
-      max-height: 3em;
+      ${LimitedParagraph}
     }
     .price {
       ${textStyle};
