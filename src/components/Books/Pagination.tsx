@@ -24,35 +24,41 @@ const Pagination = ({ pagination }: PaginationProps) => {
   if (pages <= 0) return null;
   return (
     <PaginationStyle>
-      {Array(pages)
-        .fill(0)
-        .map((_, idx) => {
-          const pageNum = idx + 1;
-          return (
-            <li key={pageNum}>
-              <Button
-                size="small"
-                scheme={pageNum === Number(current_page) ? 'primary' : 'default'}
-                onClick={() => handleClickPage(pageNum)}
-              >
-                {pageNum}
-              </Button>
-            </li>
-          );
-        })}
+      <ul>
+        {Array(pages)
+          .fill(0)
+          .map((_, idx) => {
+            const pageNum = idx + 1;
+            return (
+              <li key={pageNum}>
+                <Button
+                  size="small"
+                  scheme={pageNum === Number(current_page) ? 'primary' : 'default'}
+                  onClick={() => handleClickPage(pageNum)}
+                >
+                  {pageNum}
+                </Button>
+              </li>
+            );
+          })}
+      </ul>
     </PaginationStyle>
   );
 };
 
-const PaginationStyle = styled.ul`
+const PaginationStyle = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  margin: 0;
   padding: 24px 0;
-  gap: 8px;
-  li {
-    list-style: none;
+  ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+    li {
+      list-style: none;
+    }
   }
 `;
 
