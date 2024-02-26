@@ -15,8 +15,11 @@ const Books = () => {
     <>
       <Title size="large">도서 검색 결과</Title>
       <BookStyle>
-        <BooksFilter />
-        <BooksViewSwitcher />
+        <div className="filter">
+          <BooksFilter />
+          <BooksViewSwitcher />
+        </div>
+
         {books.length > 0 ? (
           <>
             <BooksList list={books} />
@@ -30,6 +33,15 @@ const Books = () => {
   );
 };
 
-const BookStyle = styled.div``;
+const BookStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  .filter {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0%;
+  }
+`;
 
 export default Books;
