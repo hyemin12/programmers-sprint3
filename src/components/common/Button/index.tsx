@@ -11,9 +11,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType?: 'submit' | 'button';
 }
 
-const Button = ({ children, size, scheme, disabled, isLoading, buttonType = 'button' }: ButtonProps) => {
+const Button = ({ children, size, scheme, disabled, isLoading, buttonType = 'button', ...props }: ButtonProps) => {
   return (
-    <ButtonStyle type={buttonType} size={size} scheme={scheme} disabled={disabled} isLoading={isLoading}>
+    <ButtonStyle type={buttonType} size={size} scheme={scheme} disabled={disabled} isLoading={isLoading} {...props}>
       {children}
     </ButtonStyle>
   );
