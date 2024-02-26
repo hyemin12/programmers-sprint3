@@ -22,7 +22,7 @@ export const useBooks = () => {
     fetchBooks({
       category_id: categoryIdParams ? Number(categoryIdParams) : undefined,
       new: newsParams ? true : undefined,
-      current_page: currentPageParams ? Number(currentPageParams) : 1,
+      page: currentPageParams ? Number(currentPageParams) : 1,
       limit: LIMIT,
     }).then((res) => {
       setBooks(res.lists);

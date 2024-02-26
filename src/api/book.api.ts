@@ -5,7 +5,7 @@ import { Pagination } from 'models/pagination.model';
 interface FetchBooksParams {
   category_id?: number;
   new?: boolean;
-  current_page?: number;
+  page?: number;
   limit?: number;
 }
 
