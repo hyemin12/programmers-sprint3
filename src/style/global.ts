@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
   *{
     color:${({ themeName }) => (themeName === 'light' ? '#333' : '#fff')};
     font-family: "Pretender-Regular", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif ;
+    box-sizing: border-box;
   }
   /* 폰트 크기의 팽창을 방지합니다. */
   html {
