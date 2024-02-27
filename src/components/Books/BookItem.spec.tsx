@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { BookStoreThemeProvider } from 'context/themeContext';
-import { Book } from 'models/book.model';
+import { IBook } from 'models/book.model';
 import BooksItem from './BooksItem';
 
-const dummyBook: Book = {
+const dummyBook: IBook = {
   id: 1,
   title: 'Dummy Book',
   img: 5,
@@ -11,13 +11,13 @@ const dummyBook: Book = {
   form: 'string',
   isbn: 'string',
   summary: 'Dummy summary',
-  detail: 'Dummy detail',
+  description: 'Dummy detail',
   author: 'Dummy author',
   pages: 100,
   contents: 'string',
   price: 10000,
   likes: 1,
-  pub_date: 'string',
+  published_at: 'string',
 };
 
 describe('Book Item test!', () => {

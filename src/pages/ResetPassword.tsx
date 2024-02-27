@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAlert } from 'hooks/useAlert';
 import { resetPassword, resetRequest } from 'api/auth.api';
-import { AuthData } from 'models/user.model';
+import { IAuthData } from 'models/user.model';
 import AuthForm from 'components/AuthForm';
 import EmailFieldset from 'components/AuthForm/EmailFieldset';
 import PasswordFieldset from 'components/AuthForm/PasswordFieldset';
@@ -17,9 +17,9 @@ const ResetPassword = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthData>();
+  } = useForm<IAuthData>();
 
-  const onSubmit = handleSubmit((data: AuthData) => {
+  const onSubmit = handleSubmit((data: IAuthData) => {
     if (resetRequested) {
       // 초기화 함수 호출
       resetPassword(data).then(() => {

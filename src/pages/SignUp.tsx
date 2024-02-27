@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { signUp } from 'api/auth.api';
 import { useAlert } from 'hooks/useAlert';
-import { AuthData } from 'models/user.model';
+import { IAuthData } from 'models/user.model';
 import AuthForm from 'components/AuthForm';
 import EmailFieldset from 'components/AuthForm/EmailFieldset';
 import PasswordFieldset from 'components/AuthForm/PasswordFieldset';
@@ -14,9 +14,9 @@ const SignUpPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthData>();
+  } = useForm<IAuthData>();
 
-  const onSubmit = handleSubmit((data: AuthData) => {
+  const onSubmit = handleSubmit((data: IAuthData) => {
     signUp(data)
       .then((res) => {
         showAlert('회원가입이 완료되었습니다.');

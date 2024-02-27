@@ -1,4 +1,4 @@
-export interface Order {
+export interface IOrder {
   id: number;
   created_at: string;
   address: string;

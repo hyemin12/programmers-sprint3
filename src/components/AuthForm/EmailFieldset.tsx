@@ -1,10 +1,10 @@
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import { AuthData } from 'models/user.model';
+import { IAuthData } from 'models/user.model';
 import InputText from 'components/common/InputText';
 
 export interface FieldsetProps {
-  register: UseFormRegister<AuthData>;
-  errors: FieldErrors<AuthData>;
+  register: UseFormRegister<IAuthData>;
+  errors: FieldErrors<IAuthData>;
 }
 
 const EmailFieldset = ({ register, errors }: FieldsetProps) => {

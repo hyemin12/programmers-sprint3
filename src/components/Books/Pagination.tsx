@@ -1,8 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from 'components/common/Button';
+import { IPagination } from 'models/pagination.model';
 import { LIMIT } from 'constance/pagination';
-import { Pagination as IPagination } from 'models/pagination.model';
 import { QUERYSTRING } from 'constance/querystring';
 
 interface PaginationProps {

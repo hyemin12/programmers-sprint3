@@ -1,9 +1,9 @@
-export interface CategoryItem {
+export interface ICategoryItem {
   id: number | null;
   name: string;
   isActive?: boolean;
 }
 
-export interface CategoryList {
-  lists: CategoryItem[];
+export interface ICategoryList {
+  lists: ICategoryItem[];
 }

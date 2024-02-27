@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import Title from 'components/common/Title';
 import { fetchSearchBooks } from 'api/book.api';
 import BooksList from 'components/Books/BooksList';
@@ -7,15 +8,14 @@ import Pagination from 'components/Books/Pagination';
 import BooksEmpty from 'components/Books/BooksEmpty';
 import { LIMIT } from 'constance/pagination';
 import { QUERYSTRING } from 'constance/querystring';
-import { Book } from 'models/book.model';
-import { Pagination as IPagination } from 'models/pagination.model';
-import styled from 'styled-components';
+import { IBook } from 'models/book.model';
+import { IPagination } from 'models/pagination.model';
 
 const SearchBooks = () => {
   const location = useLocation();
   const { search } = location;
   const [searchWord, setSearchWord] = useState('');
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<IBook[]>([]);
   const [pagination, setPagination] = useState<IPagination>({ total_count: 0, current_page: 1 });
 
   useEffect(() => {
