@@ -1,13 +1,14 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { FaHeart } from 'react-icons/fa';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import { ViewMode } from './BooksViewSwitcher';
-import { Book } from 'models/book.model';
+import EllipsisBox from 'components/common/EllipsisBox';
+import { IBook } from 'models/book.model';
 
 interface BooksItemProps {
-  book: Book;
+  book: IBook;
   view: ViewMode;
 }
 
@@ -15,36 +16,31 @@ const BooksItem = ({ book, view }: BooksItemProps) => {
   const { pathname } = useLocation();
   return (
     <BooksItemStyle view={view}>
-      <div className="img">
-        <img src={getImgSrc(book.img)} alt={book.title} />
-      </div>
-      <div className="content">
-        <h2 className="title">{book.title}</h2>
-        <p className="summary">{book.summary}</p>
-        <p className="author">{book.author}</p>
-        <p className="price">{formatNumber(book.price)}원</p>
-        {pathname !== '/search' && (
-          <div className="likes">
-            <FaHeart />
-            <span>{book.likes}</span>
-          </div>
-        )}
-      </div>
+      <Link to={`/books/${book.id}`}>
+        <div className="img">
+          <img src={getImgSrc(book.img)} alt={book.title} />
+        </div>
+        <div className="content">
+          <h2 className="title">
+            <EllipsisBox line={2}>{book.title}</EllipsisBox>
+          </h2>
+          <EllipsisBox line={2}>
+            <p className="summary">{book.summary}</p>
+          </EllipsisBox>
+
+          <p className="author">{book.author}</p>
+          <p className="price">{formatNumber(book.price)}원</p>
+          {pathname !== '/search' && (
+            <div className="likes">
+              <FaHeart />
+              <span>{book.likes}</span>
+            </div>
+          )}
+        </div>
+      </Link>
     </BooksItemStyle>
   );
 };
-
-/* 2줄 이상일 경우 경우 생략(...) */
-const LimitedParagraph = css`
-  /* Webkit기반 브라우저 동작 */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  /* 모든 브라우저에서 동작 */
-  max-height: 3em;
-  text-overflow: ellipsis;
-`;
 
 const textStyle = css`
   font-size: 0.85rem;
@@ -53,9 +49,13 @@ const textStyle = css`
 `;
 
 const BooksItemStyle = styled.div<{ view: ViewMode }>`
-  display: flex;
-  flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  a {
+    display: flex;
+    flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
+
   .img {
     width: ${({ view }) => (view === 'grid' ? 'auto' : '165px')};
     flex-shrink: 0;
@@ -70,7 +70,6 @@ const BooksItemStyle = styled.div<{ view: ViewMode }>`
     padding: 16px;
     position: relative;
     .title {
-      ${LimitedParagraph}
       font-size: 1.25rem;
       font-weight: bold;
       margin: 0 0 12px 0;
@@ -78,9 +77,6 @@ const BooksItemStyle = styled.div<{ view: ViewMode }>`
     .summary,
     .author {
       ${textStyle}
-    }
-    .summary {
-      ${LimitedParagraph}
     }
     .price {
       ${textStyle};

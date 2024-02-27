@@ -1,8 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { FaSmileWink } from 'react-icons/fa';
 import Title from 'components/common/Title';
-import { Link } from 'react-router-dom';
 
 const BooksEmpty = () => {
   return (

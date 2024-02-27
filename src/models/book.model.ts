@@ -1,22 +1,24 @@
-export interface Book {
+export interface IBook {
   id: number;
   title: string;
+  subTitle?: string;
   img: number;
   category_id: number;
   form: string;
   isbn: string;
+  index?: string;
   summary: string;
-  detail: string;
+  description: string;
   author: string;
   pages: number;
   contents: string;
   price: number;
   likes: number;
-  pub_date: string;
+  published_at: string;
 }
 
-export interface BookDetail extends Book {
+export interface IBookDetail extends IBook {
   author: string;
   category_name: string;
-  is_liked?: boolean;
+  liked?: boolean;
 }

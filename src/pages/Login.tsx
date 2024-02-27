@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from 'hooks/useAlert';
-import { AuthData } from 'models/user.model';
+import { IAuthData } from 'models/user.model';
 import { login } from 'api/auth.api';
 import useAuthStore from 'store/auth.store';
 import AuthForm from 'components/AuthForm';
@@ -18,9 +18,9 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthData>();
+  } = useForm<IAuthData>();
 
-  const onSubmit = handleSubmit((data: AuthData) => {
+  const onSubmit = handleSubmit((data: IAuthData) => {
     login(data)
       .then((res) => {
         storeLogin(res.token);

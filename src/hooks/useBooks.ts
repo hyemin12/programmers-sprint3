@@ -3,14 +3,14 @@ import { useLocation } from 'react-router-dom';
 import { fetchBooks } from 'api/book.api';
 import { LIMIT } from 'constance/pagination';
 import { QUERYSTRING } from 'constance/querystring';
-import { Book } from 'models/book.model';
-import { Pagination } from 'models/pagination.model';
+import { IBook } from 'models/book.model';
+import { IPagination } from 'models/pagination.model';
 
 export const useBooks = () => {
   const { search } = useLocation();
 
-  const [books, setBooks] = useState<Book[]>([]);
-  const [pagination, setPagination] = useState<Pagination>({ total_count: 0, current_page: 1 });
+  const [books, setBooks] = useState<IBook[]>([]);
+  const [pagination, setPagination] = useState<IPagination>({ total_count: 0, current_page: 1 });
 
   useEffect(() => {
     const params = new URLSearchParams(search);
