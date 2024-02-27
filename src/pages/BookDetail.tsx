@@ -7,6 +7,7 @@ import { useBook } from 'hooks/useBook';
 import { IBookDetail } from 'models/book.model';
 import { formatDate, formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
+import AddToCartButton from 'components/AddToCartButton';
 
 const bookInfoList = [
   {
@@ -49,7 +50,7 @@ const BookDetail = () => {
           ))}
           <p className="summary">{summary}</p>
           <LikesButton likes={likes} liked={liked ? liked : false} onClick={likeToggle} />
-          <div className="add-cart">장바구니 넣기</div>
+          <AddToCartButton book={book} />
         </div>
       </header>
       <div className="content">
