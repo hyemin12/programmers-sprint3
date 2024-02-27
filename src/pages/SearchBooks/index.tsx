@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Title from 'components/common/Title';
 import { fetchSearchBooks } from 'api/book.api';
-import BooksList from 'components/Books/BooksList';
-import Pagination from 'components/Books/Pagination';
-import BooksEmpty from 'components/Books/BooksEmpty';
+import Title from 'components/common/Title';
+import BooksList from 'components/BookList';
+import Pagination from 'components/common/Pagination';
+import BooksEmpty from 'components/BookEmpty';
 import { LIMIT } from 'constance/pagination';
 import { QUERYSTRING } from 'constance/querystring';
 import { IBook } from 'models/book.model';

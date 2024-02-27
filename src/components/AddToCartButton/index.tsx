@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from 'components/common/Button';
 import InputText from 'components/common/InputText';
 import { IBookDetail } from 'models/book.model';
-import { addCart } from 'api/carts.api';
-import { useAlert } from 'hooks/useAlert';
-import useAuthStore from 'store/auth.store';
-import { Link, useNavigate } from 'react-router-dom';
 import { useBook } from 'hooks/useBook';
 
 interface AddToCartButtonProps {

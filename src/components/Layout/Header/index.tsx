@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Logo from './Logo';
+import Logo from 'components/common/Logo';
 import AuthNav from './AuthNav';
 import SearchBox from './SearchBox';
 

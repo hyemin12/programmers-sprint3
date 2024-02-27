@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { BookStoreThemeProvider } from 'context/themeContext';
 import { IBook } from 'models/book.model';
-import BooksItem from './BooksItem';
+import BooksItem from '.';
 
 const dummyBook: IBook = {
   id: 1,

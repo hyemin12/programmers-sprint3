@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaAngleDown } from 'react-icons/fa';
-import Button from './Button';
+import Button from '../Button';
 
 interface EllipsisBoxProps {
   line: number;

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import BooksEmpty from 'components/Books/BooksEmpty';
-import BooksFilter from 'components/Books/BooksFilter';
-import BooksList from 'components/Books/BooksList';
-import BooksViewSwitcher from 'components/Books/BooksViewSwitcher';
-import Pagination from 'components/Books/Pagination';
+import BooksEmpty from 'components/BookEmpty/BooksEmpty';
+import BooksFilter from 'pages/Books/BooksFilter';
+import BooksList from 'components/BookList/BooksList';
+import BooksViewSwitcher from 'pages/Books/BooksViewSwitcher';
+import Pagination from 'components/common/Pagination';
 import Title from 'components/common/Title';
 import { useBooks } from 'hooks/useBooks';
 

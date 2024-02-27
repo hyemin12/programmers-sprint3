@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { FaHeart } from 'react-icons/fa';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
-import { ViewMode } from './BooksViewSwitcher';
+import { ViewMode } from '../../pages/Books/BooksViewSwitcher';
 import EllipsisBox from 'components/common/EllipsisBox';
 import { IBook } from 'models/book.model';
 

@@ -38,16 +38,3 @@ export const AuthNavStyle = styled.nav`
     }
   }
 `;
-
-export const CategoryNavStyle = styled.nav`
-  ul {
-    display: flex;
-    gap: 32px;
-    li {
-      a {
-        font-size: 1.5rem;
-        ${NavItemStyle}
-      }
-    }
-  }
-`;

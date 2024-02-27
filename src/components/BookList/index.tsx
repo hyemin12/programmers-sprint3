@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import BooksItem from './BooksItem';
 import { QUERYSTRING } from 'constance/querystring';
 import { IBook } from 'models/book.model';
-import { ViewMode } from './BooksViewSwitcher';
+import BooksItem from 'components/BookItem';
+import { ViewMode } from 'pages/Books/BooksViewSwitcher';
 
 interface BooksListProps {
   list: IBook[];

@@ -1,8 +1,8 @@
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
-import Button from '../Button';
+import Button from 'components/common/Button';
 import { QUERYSTRING } from 'constance/querystring';
 
 const SearchBox = () => {
