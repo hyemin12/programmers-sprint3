@@ -2,7 +2,7 @@ export type ThemeName = 'light' | 'dark';
 export type ColorKey = 'primary' | 'background' | 'secondary' | 'third' | 'border' | 'text';
 export type HeadingSize = 'large' | 'medium' | 'small';
 export type ButtonSize = 'large' | 'medium' | 'small';
-export type ButtonScheme = 'primary' | 'default' | 'transparent';
+export type ButtonScheme = 'primary' | 'default' | 'transparent' | 'like';
 export type LayoutWidth = 'large' | 'medium' | 'small';
 
 interface Theme {
@@ -62,6 +62,11 @@ export const light: Theme = {
     transparent: {
       color: '#333',
       backgroundColor: 'transparent',
+      border: 'none',
+    },
+    like: {
+      color: '#fff',
+      backgroundColor: 'coral',
       border: 'none',
     },
     default: {
