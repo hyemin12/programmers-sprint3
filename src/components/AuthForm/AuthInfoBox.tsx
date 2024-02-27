@@ -33,7 +33,6 @@ const InfoBoxStyle = styled.div`
     text-decoration: none;
   }
   p {
-    margin-block-start: 0;
     font-size: 0.85rem;
     a {
       margin-left: 4px;

@@ -46,6 +46,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
   blockquote,
   dl,
   dd {
+    margin-block-start: 0;
     margin-block-end: 0;
   }
   /* 제목 요소와 상호작용하는 요소에 대해 line-height를 더 짧게 설정합니다. */

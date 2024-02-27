@@ -26,7 +26,6 @@ const Logo = ({ size, type }: LogoProps) => {
 };
 
 const LogoStyle = styled.h1<Omit<LogoProps, 'type'>>`
-  margin-block-start: 0;
   img {
     width: ${({ size }) => `${size}px`};
   }
