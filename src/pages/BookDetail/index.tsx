@@ -8,6 +8,10 @@ import { IBookDetail } from 'models/book.model';
 import { formatDate, formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import AddToCartButton from 'components/AddToCartButton';
+import QuantityBox from 'components/QuantityBox';
+import React, { useState } from 'react';
+import useCartStore from 'store/cart.store';
+import Button from 'components/common/Button';
 
 const bookInfoList = [
   {
@@ -25,9 +29,21 @@ const bookInfoList = [
 const BookDetail = () => {
   const { bookId } = useParams();
   const { book, likeToggle } = useBook(bookId);
+  const [quantity, setQuantity] = useState<number>(1);
+  const { addCartItem } = useCartStore();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(Number(e.target.value));
+  };
+
+  const handleIncrease = () => setQuantity(quantity + 1);
+  const handleDecrease = () => {
+    if (quantity === 1) return;
+    setQuantity(quantity - 1);
+  };
 
   if (book === null) return null;
-  const { title, img, summary, subTitle, description, index, likes, liked } = book;
+  const { title, img, summary, subTitle, description, index, likes, liked, price } = book;
   return (
     <BookDetailStyle>
       <header>
@@ -50,9 +66,28 @@ const BookDetail = () => {
           ))}
           <p className="summary">{summary}</p>
           <LikesButton likes={likes} liked={liked ? liked : false} onClick={likeToggle} />
-          <AddToCartButton book={book} />
+          <AddToCartStyle>
+            {/* <div className="price-quantity-wrapper"> */}
+            <span className="total-price">
+              총 금액 <h4>{formatNumber(price)}원</h4>
+            </span>
+
+            <div className="button-box">
+              <QuantityBox
+                quantity={quantity}
+                handleOnchange={handleChange}
+                handleDecrease={handleDecrease}
+                handleIncrease={handleIncrease}
+              />
+              <Button size="medium" scheme="primary">
+                장바구니에 담기
+              </Button>
+            </div>
+            {/* </div> */}
+          </AddToCartStyle>
         </div>
       </header>
+
       <div className="content">
         <Title size="medium">책 소개</Title>
         <EllipsisBox line={4} $expanded>
@@ -134,6 +169,28 @@ const BookDetailStyle = styled.div`
     > div {
       padding: 18px 0%;
     }
+  }
+`;
+
+const AddToCartStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid ${({ theme }) => theme.color.border};
+
+  .total-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    h4 {
+      font-size: 1.2rem;
+    }
+  }
+  .button-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
 `;
 export default BookDetail;
