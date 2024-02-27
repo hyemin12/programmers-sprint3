@@ -7,6 +7,7 @@ import ResetPassword from 'pages/ResetPassword';
 import Login from 'pages/Login';
 import Books from 'pages/Books';
 import SearchBooks from 'pages/SearchBooks';
+import BookDetail from './pages/BookDetail';
 
 const routerData = [
   {
@@ -17,6 +18,10 @@ const routerData = [
   {
     path: '/books',
     element: <Books />,
+  },
+  {
+    path: '/books/:bookId',
+    element: <BookDetail />,
   },
   {
     path: '/search',
