@@ -9,6 +9,12 @@ interface FetchBooksParams {
   limit?: number;
 }
 
+interface FetchSearchBooksParams {
+  query: string;
+  page?: number;
+  limit?: number;
+}
+
 interface FetchBooksResponse {
   lists: Book[];
   pagination: Pagination;
@@ -27,4 +33,12 @@ export const fetchBooks = async (params: FetchBooksParams) => {
       },
     };
   }
+};
+
+export const fetchSearchBooks = async (params: FetchSearchBooksParams) => {
+  const response = await httpClient.get<FetchBooksResponse>(`/books/search`, {
+    params,
+  });
+
+  return response.data;
 };

@@ -1,10 +1,10 @@
-import { Book } from 'models/book.model';
-import React from 'react';
+import { useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { FaHeart } from 'react-icons/fa';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
-import { FaHeart } from 'react-icons/fa';
 import { ViewMode } from './BooksViewSwitcher';
+import { Book } from 'models/book.model';
 
 interface BooksItemProps {
   book: Book;
@@ -12,6 +12,7 @@ interface BooksItemProps {
 }
 
 const BooksItem = ({ book, view }: BooksItemProps) => {
+  const { pathname } = useLocation();
   return (
     <BooksItemStyle view={view}>
       <div className="img">
@@ -22,10 +23,12 @@ const BooksItem = ({ book, view }: BooksItemProps) => {
         <p className="summary">{book.summary}</p>
         <p className="author">{book.author}</p>
         <p className="price">{formatNumber(book.price)}원</p>
-        <div className="likes">
-          <FaHeart />
-          <span>{book.likes}</span>
-        </div>
+        {pathname !== '/search' && (
+          <div className="likes">
+            <FaHeart />
+            <span>{book.likes}</span>
+          </div>
+        )}
       </div>
     </BooksItemStyle>
   );
