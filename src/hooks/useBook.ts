@@ -10,7 +10,7 @@ export const useBook = (bookId: string | undefined) => {
   const [book, setBook] = useState<IBookDetail | null>(null);
   const [cartAdded, setCartAdded] = useState(false);
 
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
   const navigate = useNavigate();
   const { isLoggedIn } = useAuthStore();
 
