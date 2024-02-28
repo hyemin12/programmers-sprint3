@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import RouteError from './components/RouteError';
-import GeneralLayout from 'components/Layout';
+import GeneralLayout from 'components/Layout/Layout';
 import Home from 'pages/Home';
 import SignUp from 'pages/SignUp';
 import ResetPassword from 'pages/ResetPassword';
