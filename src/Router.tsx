@@ -9,6 +9,7 @@ import Books from 'pages/Books';
 import SearchBooks from 'pages/SearchBooks';
 import BookDetail from './pages/BookDetail';
 import Cart from 'pages/Cart';
+import Order from 'pages/Order';
 
 const routerData = [
   {
@@ -31,6 +32,10 @@ const routerData = [
   {
     path: '/cart',
     element: <Cart />,
+  },
+  {
+    path: '/order',
+    element: <Order />,
   },
   {
     path: '/signup',
