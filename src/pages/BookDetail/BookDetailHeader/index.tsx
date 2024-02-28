@@ -70,9 +70,6 @@ const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderPr
               handleIncrease={handleIncrease}
             />
             <AddToCartButton book={book} quantity={quantity} />
-            <Button size="medium" scheme="primary">
-              장바구니에 담기
-            </Button>
           </div>
         </AddToCartStyle>
       </div>

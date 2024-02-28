@@ -17,7 +17,7 @@ interface CartItemProps {
 const CartItem = ({ cart }: CartItemProps) => {
   if (!cart) return null;
   const { title, price, quantity, id, book_id } = cart;
-  const { selectedItems, deleteSelectedItems, addSelectedItem } = useCartStore();
+  const { selectedItems, deleteSelectedItems, addSelectedItem, deleteCartItem } = useCartStore();
   const [itemQuantity, setItemQuantity] = useState(quantity);
 
   const isChecked = useMemo(() => {
@@ -48,6 +48,7 @@ const CartItem = ({ cart }: CartItemProps) => {
       setItemQuantity(newQuantity);
     });
   };
+
   return (
     <CartItemStyle>
       <div className="info">
@@ -73,7 +74,7 @@ const CartItem = ({ cart }: CartItemProps) => {
           />
         </div>
       </div>
-      <div className="delete">
+      <div className="delete" onClick={() => deleteCartItem(id)}>
         <FaTimes />
       </div>
     </CartItemStyle>

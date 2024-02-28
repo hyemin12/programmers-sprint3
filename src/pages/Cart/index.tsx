@@ -2,18 +2,19 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaShoppingCart } from 'react-icons/fa';
+import CheckIconButton from './CheckIconButton';
 import Title from 'components/common/Title';
 import Button from 'components/common/Button';
 import Empty from 'components/Empty';
 import CartItem from './CartItem';
 import useCartStore from 'store/cart.store';
 import useAuthStore from 'store/auth.store';
-import CheckIconButton from './CheckIconButton';
 
 const Cart = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
-  const { cartItems, selectedItems, clearSelectedItem, fetchCartItems, addAllSelectedItems } = useCartStore();
+  const { cartItems, selectedItems, clearSelectedItem, fetchCartItems, addAllSelectedItems, clearCartItems } =
+    useCartStore();
 
   useEffect(() => {
     fetchCartItems();
@@ -43,7 +44,7 @@ const Cart = () => {
           </Button>
         </div>
 
-        <Button size="medium" scheme="transparent">
+        <Button size="medium" scheme="transparent" onClick={() => clearCartItems(cartItems.map((item) => item.id))}>
           전체 삭제
         </Button>
       </ButtonBox>
