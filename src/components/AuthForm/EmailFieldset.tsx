@@ -1,6 +1,6 @@
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import { IAuthData } from 'models/user.model';
-import InputText from 'components/common/InputText';
+import { InputText } from 'components/common';
 
 export interface FieldsetProps {
   register: UseFormRegister<IAuthData>;

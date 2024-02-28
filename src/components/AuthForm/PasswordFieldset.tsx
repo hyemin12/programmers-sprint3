@@ -1,4 +1,4 @@
-import InputText from 'components/common/InputText';
+import { InputText } from 'components/common';
 import { FieldsetProps } from './EmailFieldset';
 
 const PasswordFieldset = ({ register, errors }: FieldsetProps) => {
