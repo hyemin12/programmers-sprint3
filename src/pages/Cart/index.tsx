@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -9,6 +9,7 @@ import Empty from 'components/Empty';
 import CartItem from './CartItem';
 import useCartStore from 'store/cart.store';
 import useAuthStore from 'store/auth.store';
+import CartSummary from './CartSummary';
 
 const Cart = () => {
   const { isLoggedIn } = useAuthStore();
@@ -32,6 +33,24 @@ const Cart = () => {
       addAllSelectedItems();
     }
   };
+
+  const totalQuantity = useMemo(() => {
+    return cartItems.reduce((acc, cart) => {
+      if (selectedItems.includes(cart.id)) {
+        return (acc += cart.quantity);
+      }
+      return acc;
+    }, 0);
+  }, [cartItems, selectedItems]);
+
+  const totalPrice = useMemo(() => {
+    return cartItems.reduce((acc, cart) => {
+      if (selectedItems.includes(cart.id)) {
+        return (acc += cart.price * cart.quantity);
+      }
+      return acc;
+    }, 0);
+  }, [cartItems, selectedItems]);
 
   return (
     <>
@@ -62,6 +81,7 @@ const Cart = () => {
             <div className="summary"></div>
           </>
         )}
+        <CartSummary totalQuantity={totalQuantity} totalPrice={totalPrice} />
       </CartStyle>
     </>
   );
@@ -83,6 +103,9 @@ const ButtonBox = styled.div`
     padding: 0;
   }
 `;
-const CartStyle = styled.div``;
+const CartStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default Cart;
