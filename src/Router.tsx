@@ -10,6 +10,7 @@ import SearchBooks from 'pages/SearchBooks';
 import BookDetail from './pages/BookDetail';
 import Cart from 'pages/Cart';
 import Order from 'pages/Order';
+import OrderList from 'pages/OrderList';
 
 const routerData = [
   {
@@ -36,6 +37,10 @@ const routerData = [
   {
     path: '/order',
     element: <Order />,
+  },
+  {
+    path: '/orderlist',
+    element: <OrderList />,
   },
   {
     path: '/signup',
