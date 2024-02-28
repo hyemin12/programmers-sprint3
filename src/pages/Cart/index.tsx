@@ -11,7 +11,7 @@ import useCartStore from 'store/cart.store';
 import useAuthStore from 'store/auth.store';
 import CartSummary from './CartSummary';
 import { useAlert } from 'hooks/useAlert';
-import { IOrderSheet } from 'models/order.model';
+import { IOrderSheet, IOrderedBook } from 'models/order.model';
 
 const Cart = () => {
   const { isLoggedIn } = useAuthStore();
@@ -62,12 +62,18 @@ const Cart = () => {
     }
 
     // 주문서 작성으로 데이터 전달
-    const selectedFirstBook = cartItems.find((item) => item.id === selectedItems[0]);
+    const selectedBooks = cartItems.filter((item) => selectedItems.includes(item.id));
+    const formatOrderBooks: IOrderedBook[] = selectedBooks.map((item) => ({
+      quantity: item.quantity,
+      cartItem_id: item.id,
+      book_id: item.book_id,
+    }));
+
     const orderData: Omit<Omit<IOrderSheet, 'delivery'>, 'payment'> = {
-      books: selectedItems,
-      total_price: totalQuantity,
+      books: formatOrderBooks,
+      total_price: totalPrice,
       total_quantity: totalQuantity,
-      first_book_title: selectedFirstBook ? selectedFirstBook.title : '',
+      first_book_title: selectedBooks ? selectedBooks[0].title : '',
     };
 
     showConfirm('주문하시겠습니까?', () => {
@@ -131,7 +137,7 @@ const ButtonBox = styled.div`
     padding: 0;
   }
 `;
-const CartStyle = styled.div`
+export const CartStyle = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;

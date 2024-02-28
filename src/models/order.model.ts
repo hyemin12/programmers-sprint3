@@ -1,3 +1,5 @@
+import { ICart } from './cart.model';
+
 export interface IOrder {
   id: number;
   created_at: string;
@@ -9,15 +11,23 @@ export interface IOrder {
   total_price: number;
 }
 
+export interface IOrderedBook {
+  quantity: number;
+  book_id: number;
+  cartItem_id: number;
+}
+
 export interface IOrderSheet {
-  books: number[];
+  books: IOrderedBook[];
   total_quantity: number;
   total_price: number;
   first_book_title: string;
   payment: string;
-  delivery: {
-    address: string;
-    contact: string;
-    recipient: string;
-  };
+  delivery: IDelivery;
+}
+
+export interface IDelivery {
+  address: string;
+  contact: string;
+  recipient: string;
 }
