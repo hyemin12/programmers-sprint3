@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { Button, InputText } from 'components/common';
+import Button from './Button';
+import InputText from './InputText';
 
 interface QuantityBoxProps {
   handleIncrease: () => void;
