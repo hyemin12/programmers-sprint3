@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 import { formatNumber } from 'utils/format';
@@ -8,7 +9,6 @@ import QuantityBox from 'components/QuantityBox';
 import { ICart } from 'models/cart.model';
 import { updateQuantity } from 'api/carts.api';
 import useCartStore from 'store/cart.store';
-import { Link } from 'react-router-dom';
 
 interface CartItemProps {
   cart: ICart;
@@ -85,7 +85,6 @@ const CartItemStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: start;
-  /* padding: 24px 12px; */
   border-top: 1px solid ${({ theme }) => theme.color.border};
   &:last-child {
     border-bottom: 1px solid ${({ theme }) => theme.color.border};
@@ -110,6 +109,10 @@ const CartItemStyle = styled.div`
       font-weight: bold;
       text-align: center;
     }
+  }
+  .delete {
+    padding: 12px;
+    cursor: pointer;
   }
 `;
 
