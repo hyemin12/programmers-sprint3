@@ -10,10 +10,13 @@ import CartItem from './CartItem';
 import useCartStore from 'store/cart.store';
 import useAuthStore from 'store/auth.store';
 import CartSummary from './CartSummary';
+import { useAlert } from 'hooks/useAlert';
+import { IOrderSheet } from 'models/order.model';
 
 const Cart = () => {
   const { isLoggedIn } = useAuthStore();
   const navigate = useNavigate();
+  const { showAlert, showConfirm } = useAlert();
   const { cartItems, selectedItems, clearSelectedItem, fetchCartItems, addAllSelectedItems, clearCartItems } =
     useCartStore();
 
@@ -52,6 +55,26 @@ const Cart = () => {
     }, 0);
   }, [cartItems, selectedItems]);
 
+  const handlerOrder = () => {
+    if (selectedItems.length === 0) {
+      showAlert('주문할 상품을 선택해주세요');
+      return;
+    }
+
+    // 주문서 작성으로 데이터 전달
+    const selectedFirstBook = cartItems.find((item) => item.id === selectedItems[0]);
+    const orderData: Omit<Omit<IOrderSheet, 'delivery'>, 'payment'> = {
+      books: selectedItems,
+      total_price: totalQuantity,
+      total_quantity: totalQuantity,
+      first_book_title: selectedFirstBook ? selectedFirstBook.title : '',
+    };
+
+    showConfirm('주문하시겠습니까?', () => {
+      navigate('/order', { state: orderData });
+    });
+  };
+
   return (
     <>
       <Title size="large">장바구니</Title>
@@ -81,7 +104,12 @@ const Cart = () => {
             <div className="summary"></div>
           </>
         )}
-        <CartSummary totalQuantity={totalQuantity} totalPrice={totalPrice} />
+        <div className="summary">
+          <CartSummary totalQuantity={totalQuantity} totalPrice={totalPrice} />
+          <Button size="large" scheme="primary" onClick={handlerOrder}>
+            주문하기
+          </Button>
+        </div>
       </CartStyle>
     </>
   );
@@ -106,6 +134,15 @@ const ButtonBox = styled.div`
 const CartStyle = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 20px;
+  .content {
+    flex-grow: 1;
+  }
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 `;
 
 export default Cart;

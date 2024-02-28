@@ -8,3 +8,16 @@ export interface IOrder {
   total_quantity: number;
   total_price: number;
 }
+
+export interface IOrderSheet {
+  books: number[];
+  total_quantity: number;
+  total_price: number;
+  first_book_title: string;
+  payment: string;
+  delivery: {
+    address: string;
+    contact: string;
+    recipient: string;
+  };
+}
