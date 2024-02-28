@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { FaShoppingCart } from 'react-icons/fa';
 import Title from 'components/common/Title';
 import Button from 'components/common/Button';
+import Empty from 'components/Empty';
 import CartItem from './CartItem';
 import useCartStore from 'store/cart.store';
 import useAuthStore from 'store/auth.store';
@@ -45,13 +47,20 @@ const Cart = () => {
           전체 삭제
         </Button>
       </ButtonBox>
+
       <CartStyle>
-        <div className="content">
-          {cartItems.map((item) => (
-            <CartItem cart={item} key={item.id} />
-          ))}
-        </div>
-        <div className="summary"></div>
+        {cartItems.length === 0 ? (
+          <Empty icon={<FaShoppingCart />} title="장바구니가 비어있습니다." />
+        ) : (
+          <>
+            <div className="content">
+              {cartItems.map((item) => (
+                <CartItem cart={item} key={item.id} />
+              ))}
+            </div>
+            <div className="summary"></div>
+          </>
+        )}
       </CartStyle>
     </>
   );

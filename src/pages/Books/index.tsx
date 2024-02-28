@@ -1,9 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
+import BooksViewSwitcher from 'pages/Books/BooksViewSwitcher';
 import BooksEmpty from 'components/BookEmpty';
 import BooksFilter from 'pages/Books/BooksFilter';
 import BooksList from 'components/BookList';
-import BooksViewSwitcher from 'pages/Books/BooksViewSwitcher';
 import Pagination from 'components/common/Pagination';
 import Title from 'components/common/Title';
 import { useBooks } from 'hooks/useBooks';
