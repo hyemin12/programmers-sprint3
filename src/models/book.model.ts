@@ -18,6 +18,8 @@ export interface IBook {
 }
 
 export interface IBookDetail extends IBook {
+  reviews?: [];
+  bestSellers?: [];
   author: string;
   category_name: string;
   liked?: boolean;
