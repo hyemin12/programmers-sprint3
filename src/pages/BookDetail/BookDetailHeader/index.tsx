@@ -4,10 +4,10 @@ import Title from 'components/common/Title';
 import LikesButton from 'components/LikesButton';
 import Button from 'components/common/Button';
 import QuantityBox from 'components/QuantityBox';
+import AddToCartButton from 'components/AddToCartButton';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import { IBookDetail } from 'models/book.model';
-import useCartStore from 'store/cart.store';
 import { AddToCartStyle } from '../BookDetail.styles';
 
 interface BookDetailHeaderProps {
@@ -20,7 +20,6 @@ const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderPr
   if (!book) return null;
 
   const [quantity, setQuantity] = useState<number>(1);
-  const { addCartItem } = useCartStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuantity(Number(e.target.value));
@@ -70,6 +69,7 @@ const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderPr
               handleDecrease={handleDecrease}
               handleIncrease={handleIncrease}
             />
+            <AddToCartButton book={book} quantity={quantity} />
             <Button size="medium" scheme="primary">
               장바구니에 담기
             </Button>
