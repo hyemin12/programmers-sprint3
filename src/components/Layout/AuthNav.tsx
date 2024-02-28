@@ -3,9 +3,11 @@ import { FaRegUser } from 'react-icons/fa';
 
 import useAuthStore from 'store/auth.store';
 import { AuthNavStyle } from 'style/AuthNav.styles';
+import useCartStore from 'store/cart.store';
 
 const AuthNav = () => {
   const { isLoggedIn, storeLogout } = useAuthStore();
+  const { cartItems } = useCartStore();
 
   return (
     <AuthNavStyle>
@@ -14,6 +16,7 @@ const AuthNav = () => {
           <>
             <li>
               <Link to="/cart">장바구니</Link>
+              {cartItems.length > 0 && <span className="cart-isExist">{cartItems.length}</span>}
             </li>
             <li>
               <Link to="/orderlist">주문내역</Link>

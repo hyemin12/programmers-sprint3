@@ -18,6 +18,7 @@ export const AuthNavStyle = styled.nav`
     display: flex;
     gap: 16px;
     li {
+      position: relative;
       a,
       button {
         ${NavItemStyle}
@@ -25,6 +26,7 @@ export const AuthNavStyle = styled.nav`
         display: flex;
         align-items: center;
         line-height: 1;
+
         &:hover {
           svg {
             fill: ${({ theme }) => theme.color.primary};
@@ -35,6 +37,21 @@ export const AuthNavStyle = styled.nav`
           margin-right: 6px;
         }
       }
+    }
+    .cart-isExist {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 16px;
+      height: 16px;
+      background-color: ${({ theme }) => theme.color.primary};
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.5em;
+      line-height: 2;
+      position: absolute;
+      right: -6px;
+      top: -12px;
     }
   }
 `;
