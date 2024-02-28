@@ -21,8 +21,10 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return response;
     },
     (error) => {
+      console.log(error);
+
       // 로그인 만료 처리
-      if (error.response.status === 401) {
+      if (error.response.statusText === 'Unauthorized') {
         removeToken();
         window.location.href = '/login';
         return;

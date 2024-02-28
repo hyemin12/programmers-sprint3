@@ -1,15 +1,19 @@
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import EllipsisBox from 'components/common/EllipsisBox';
-import Title from 'components/common/Title';
-import LikesButton from 'components/LikesButton';
 import { useBook } from 'hooks/useBook';
 import { IBookDetail } from 'models/book.model';
 import { formatDate, formatNumber } from 'utils/format';
-import { getImgSrc } from 'utils/image';
-import AddToCartButton from 'components/AddToCartButton';
+import BookDetailHeader from './BookDetailHeader';
+import BookDetailContents from './BookDetailContents';
+import { BookDetailStyle } from './BookDetail.styles';
 
-const bookInfoList = [
+export interface BookInfo {
+  label: string;
+  key: keyof IBookDetail;
+  filter?: (book: IBookDetail) => React.JSX.Element | string;
+}
+
+const bookInfoList: BookInfo[] = [
   {
     label: '카테고리',
     key: 'category_name',
@@ -25,115 +29,17 @@ const bookInfoList = [
 const BookDetail = () => {
   const { bookId } = useParams();
   const { book, likeToggle } = useBook(bookId);
+  console.log(book);
 
   if (book === null) return null;
-  const { title, img, summary, subTitle, description, index, likes, liked } = book;
+  const { description, index } = book;
   return (
     <BookDetailStyle>
-      <header>
-        <div className="img">
-          <img src={getImgSrc(img)} alt={title} />
-        </div>
-        <div className="info">
-          <div className="title-wrapper">
-            <Title size="large" color="text">
-              {title}
-            </Title>
-            {subTitle && <div className="subtitle">{subTitle}</div>}
-          </div>
+      <BookDetailHeader book={book} bookInfoList={bookInfoList} likeToggle={likeToggle} />
 
-          {bookInfoList.map(({ label, key, filter }) => (
-            <dl key={key}>
-              <dt>{label}</dt>
-              <dd>{filter ? filter(book) : book[key as keyof IBookDetail]}</dd>
-            </dl>
-          ))}
-          <p className="summary">{summary}</p>
-          <LikesButton likes={likes} liked={liked ? liked : false} onClick={likeToggle} />
-          <AddToCartButton book={book} />
-        </div>
-      </header>
-      <div className="content">
-        <Title size="medium">책 소개</Title>
-        <EllipsisBox line={4} $expanded>
-          <p className="detail">{description}</p>
-        </EllipsisBox>
-
-        {index && (
-          <>
-            <Title size="medium">목차</Title>
-            <EllipsisBox line={5} $expanded>
-              {index
-                .replace(/\\n/g, '\n')
-                .split('\n')
-                .map((item, index) => {
-                  if (item.startsWith('-')) {
-                    // '-'로 시작하는 경우
-                    return <p key={index}>&nbsp;&nbsp;&nbsp;&nbsp;{item}</p>;
-                  } else if (/^Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ/.test(item)) {
-                    // 로마 숫자로 시작하는 경우
-                    return (
-                      <p key={index}>
-                        <strong>{item}</strong>
-                      </p>
-                    );
-                  } else {
-                    return <p key={index}>{item}</p>;
-                  }
-                })}
-            </EllipsisBox>
-          </>
-        )}
-      </div>
+      <BookDetailContents book={book} />
     </BookDetailStyle>
   );
 };
 
-const BookDetailStyle = styled.div`
-  header {
-    display: flex;
-    align-items: start;
-    gap: 24px;
-    padding: 0 0 24px 0;
-    .img {
-      flex: 1;
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-    .info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      .title-wrapper {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-
-        .subtitle {
-          color: ${({ theme }) => theme.color.secondary};
-        }
-      }
-      dl {
-        display: flex;
-        margin: 0;
-        dt {
-          width: 80px;
-          color: ${({ theme }) => theme.color.secondary};
-        }
-        a {
-          color: ${({ theme }) => theme.color.primary};
-        }
-      }
-    }
-  }
-  .content {
-    > div {
-      padding: 18px 0%;
-    }
-  }
-`;
 export default BookDetail;

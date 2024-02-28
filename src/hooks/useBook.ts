@@ -4,13 +4,10 @@ import { IBookDetail } from 'models/book.model';
 import { fetchBook, likeBook, unlikeBook } from 'api/book.api';
 import { useAlert } from './useAlert';
 import useAuthStore from 'store/auth.store';
-import { addCart } from 'api/carts.api';
 
 export const useBook = (bookId: string | undefined) => {
   const [book, setBook] = useState<IBookDetail | null>(null);
-  const [cartAdded, setCartAdded] = useState(false);
-
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
   const navigate = useNavigate();
   const { isLoggedIn } = useAuthStore();
 
@@ -31,22 +28,6 @@ export const useBook = (bookId: string | undefined) => {
     }
   };
 
-  const addToCart = (quantity: number) => {
-    if (!book) return;
-
-    if (!isLoggedIn) {
-      showAlert('로그인이 필요합니다.');
-      navigate('/login');
-      return;
-    }
-    addCart({ book_id: book.id, quantity }).then(() => {
-      setCartAdded(true);
-      setTimeout(() => {
-        setCartAdded(false);
-      }, 3000);
-    });
-  };
-
   useEffect(() => {
     if (!bookId) return;
 
@@ -55,5 +36,5 @@ export const useBook = (bookId: string | undefined) => {
     });
   }, [bookId]);
 
-  return { book, likeToggle, addToCart, cartAdded };
+  return { book, likeToggle };
 };

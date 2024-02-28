@@ -1,47 +1,64 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from 'components/common/Button';
 import InputText from 'components/common/InputText';
 import { IBookDetail } from 'models/book.model';
 import { useBook } from 'hooks/useBook';
+import useCartStore from 'store/cart.store';
+import { useAlert } from 'hooks/useAlert';
+import useAuthStore from 'store/auth.store';
+import { addCart } from 'api/carts.api';
 
 interface AddToCartButtonProps {
   book: IBookDetail;
+  quantity: number;
 }
 
-const AddToCartButton = ({ book }: AddToCartButtonProps) => {
-  const [quantity, setQuantity] = useState<number>(1);
-  const { addToCart, cartAdded } = useBook(book.id.toString());
+const AddToCartButton = ({ book, quantity }: AddToCartButtonProps) => {
+  const [cartAdded, setCartAdded] = useState(false);
+  const { addCartItem } = useCartStore();
+  const { isLoggedIn } = useAuthStore();
+  const { showAlert } = useAlert();
+  const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuantity(Number(e.target.value));
-  };
+  const handleAddCart = async () => {
+    if (!book) return;
 
-  const handleIncrease = () => setQuantity(quantity + 1);
-  const handleDecrease = () => {
-    if (quantity === 1) return;
-    setQuantity(quantity - 1);
+    if (!isLoggedIn) {
+      showAlert('로그인이 필요합니다.');
+      navigate('/login');
+      return;
+    }
+
+    const data = {
+      book_id: book.id,
+      quantity,
+      title: book.title,
+      summary: book.summary,
+      price: book.price,
+    };
+
+    try {
+      await addCartItem(data);
+      setCartAdded(true);
+      setTimeout(() => {
+        setCartAdded(false);
+      }, 3000);
+    } catch (error) {
+      console.error('장바구니에 아이템을 추가하는 중에 오류가 발생했습니다.', error);
+    }
   };
 
   return (
     <AddToCartButtonStyle $added={cartAdded}>
-      <div>
-        <Button size="medium" scheme="default" onClick={handleDecrease}>
-          -
-        </Button>
-        <InputText inputType="number" value={quantity} onChange={handleChange} />
-        <Button size="medium" scheme="default" onClick={handleIncrease}>
-          +
-        </Button>
-      </div>
-      <Button size="medium" scheme="primary" onClick={() => addToCart(quantity)}>
+      <Button size="medium" scheme="primary" onClick={handleAddCart}>
         장바구니에 담기
       </Button>
 
       <div className="added">
         <p>장바구니에 추가되었습니다</p>
-        <Link to="/carts">장바구니로 이동</Link>
+        <Link to="/cart">장바구니로 이동</Link>
       </div>
     </AddToCartButtonStyle>
   );

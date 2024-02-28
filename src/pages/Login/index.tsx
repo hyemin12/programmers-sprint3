@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 
 const Login = () => {
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
 
   const { storeLogin } = useAuthStore();
 
