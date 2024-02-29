@@ -4,9 +4,11 @@ import { FaRegUser } from 'react-icons/fa';
 import useAuthStore from 'store/auth.store';
 import { AuthNavStyle } from 'style/AuthNav.styles';
 import useCartStore from 'store/cart.store';
+import { useAuth } from 'hooks/useAuth';
 
 const AuthNav = () => {
-  const { isLoggedIn, storeLogout } = useAuthStore();
+  const { isLoggedIn } = useAuthStore();
+  const { userLogout } = useAuth();
   const { cartItems } = useCartStore();
 
   return (
@@ -22,7 +24,7 @@ const AuthNav = () => {
               <Link to="/orderlist">주문내역</Link>
             </li>
             <li>
-              <button onClick={storeLogout}>로그아웃</button>
+              <button onClick={userLogout}>로그아웃</button>
             </li>
           </>
         )}
