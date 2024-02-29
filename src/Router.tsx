@@ -1,22 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { SignUp, ResetPassword, Login, Books, SearchBooks, Cart, BookDetail, Order, OrderList, Home } from 'pages';
 import RouteError from './components/RouteError';
-import GeneralLayout from 'components/Layout/Layout';
-import Home from 'pages/Home';
-import SignUp from 'pages/SignUp';
-import ResetPassword from 'pages/ResetPassword';
-import Login from 'pages/Login';
-import Books from 'pages/Books';
-import SearchBooks from 'pages/SearchBooks';
-import BookDetail from './pages/BookDetail';
-import Cart from 'pages/Cart';
-import Order from 'pages/Order';
-import OrderList from 'pages/OrderList';
+import { GeneralLayout } from 'components/Layout';
 
 const routerData = [
   {
     path: '/',
     element: <Home />,
-    errorElement: <RouteError />,
   },
   {
     path: '/books',
@@ -59,7 +49,7 @@ const router = createBrowserRouter(
   routerData.map((route) => ({
     path: route.path,
     element: <GeneralLayout>{route.element}</GeneralLayout>,
-    errorElement: route.errorElement,
+    errorElement: <RouteError />,
   })),
 );
 

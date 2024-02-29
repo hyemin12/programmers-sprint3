@@ -1,3 +1,4 @@
+import { getToken } from 'utils/savedTokenToLocalStorage';
 import { create } from 'zustand';
 
 interface AuthStoreState {
@@ -6,26 +7,15 @@ interface AuthStoreState {
   storeLogout: () => void;
 }
 
-export const getToken = () => {
-  const token = localStorage.getItem('token');
-  return token;
-};
-const setToken = (token: string) => {
-  localStorage.setItem('token', token);
-};
-export const removeToken = () => {
-  localStorage.removeItem('token');
-};
-
 const useAuthStore = create<AuthStoreState>((set) => ({
   isLoggedIn: getToken() ? true : false,
   storeLogin: (token: string) => {
-    set(() => ({ isLoggedIn: true }));
-    setToken(token);
+    if (token) {
+      set(() => ({ isLoggedIn: true }));
+    }
   },
   storeLogout: () => {
     set(() => ({ isLoggedIn: false }));
-    removeToken();
   },
 }));
 
