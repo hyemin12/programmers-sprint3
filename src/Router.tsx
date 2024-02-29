@@ -7,7 +7,6 @@ const routerData = [
   {
     path: '/',
     element: <Home />,
-    errorElement: <RouteError />,
   },
   {
     path: '/books',
@@ -50,7 +49,7 @@ const router = createBrowserRouter(
   routerData.map((route) => ({
     path: route.path,
     element: <GeneralLayout>{route.element}</GeneralLayout>,
-    errorElement: route.errorElement,
+    errorElement: <RouteError />,
   })),
 );
 
