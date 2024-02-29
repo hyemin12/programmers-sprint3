@@ -1,24 +1,14 @@
-import { IOrder, IOrderDetail, IOrderSheet } from 'models/order.model';
-import { httpClient } from './http';
-
-interface FetchOrdersResponse {
-  lists: IOrder[];
-}
-interface FetchOrderResponse {
-  lists: IOrderDetail[];
-}
+import { IOrderSheet } from 'models/order.model';
+import { requestHandler } from './http';
 
 export const order = async (orderData: IOrderSheet) => {
-  const response = await httpClient.post('/orders', orderData);
-  return response.data;
+  return await requestHandler('post', '/orders', orderData);
 };
 
 export const fetchOrders = async () => {
-  const response = await httpClient.get<FetchOrdersResponse>('/orders');
-  return response.data.lists;
+  return await requestHandler('get', '/orders');
 };
 
 export const fetchOrder = async (orderId: number) => {
-  const response = await httpClient.get<FetchOrderResponse>(`/orders/${orderId}`);
-  return response.data.lists;
+  return await requestHandler('get', `/orders/${orderId}`);
 };

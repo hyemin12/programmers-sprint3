@@ -1,26 +1,18 @@
 import { IAuthData } from 'models/user.model';
-import { httpClient } from './http';
+import { requestHandler } from './http';
 
 export const signUp = async (userData: IAuthData) => {
-  const response = await httpClient.post('/users/join', userData);
-  return response.data;
+  return await requestHandler('post', '/users/join', userData);
 };
 
-export const resetRequest = async (data: IAuthData) => {
-  const response = await httpClient.post('/users/reset', data);
-  return response.data;
+export const resetRequest = async (userData: IAuthData) => {
+  return await requestHandler('post', '/users/reset', userData);
 };
 
-export const resetPassword = async (data: IAuthData) => {
-  const response = await httpClient.put('/users/reset', data);
-  return response.data;
+export const resetPassword = async (userData: IAuthData) => {
+  return await requestHandler('put', '/users/reset', userData);
 };
-
-interface LoginResponse {
-  token: string;
-}
 
 export const login = async (userData: IAuthData) => {
-  const response = await httpClient.post<LoginResponse>('/users/login', userData);
-  return response.data;
+  return await requestHandler('post', '/users/login', userData);
 };
