@@ -26,6 +26,9 @@ export const fetchBooks = async (params: FetchBooksParams) => {
     };
   }
 };
+export const fetchBestSeller = async () => {
+  return await requestHandler('get', `/books/best`);
+};
 export const fetchBook = async (bookId: string) => {
   return await requestHandler('get', `/books/${bookId}`);
 };
