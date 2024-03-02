@@ -26,7 +26,8 @@ export const useCategory = () => {
   useEffect(() => {
     fetchCategory().then((response) => {
       if (!response) return;
-      const categoryWithAll = [{ id: null, name: '전체' }, ...response];
+      const categoryWithoutTest = response.filter((item: ICategoryItem) => item.name !== '테스트');
+      const categoryWithAll = [{ id: null, name: '전체' }, ...categoryWithoutTest];
       setCategory(categoryWithAll);
       setActive();
     });

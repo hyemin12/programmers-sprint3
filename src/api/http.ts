@@ -51,6 +51,7 @@ const httpMethods: Record<RequestMethod, (endPoint: string, payload?: any) => Pr
 export const requestHandler = async <T>(method: RequestMethod, endPoint: string, payload?: T) => {
   const response = await httpMethods[method](endPoint, payload);
 
-  if (endPoint === '/books' && method === 'get') return response.data;
+  // 도서 목록, 검색 도서 목록일 경우 response.data 반환하도록 설정
+  if ((endPoint === '/books' || endPoint === '/books/search') && method === 'get') return response.data;
   return response.data?.lists || response.data;
 };

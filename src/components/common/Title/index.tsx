@@ -16,6 +16,7 @@ const Title = ({ children, size, color }: TitleProps) => {
   );
 };
 const TitleStyle = styled.h1<Omit<TitleProps, 'children'>>`
+  margin-bottom: 20px;
   font-size: ${({ theme, size }) => theme.heading[size].fontSize};
   color: ${({ theme, color }) => (color ? theme.color[color] : theme.color.primary)};
 `;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 import { BooksFilter, BookList, BookEmpty, BooksViewSwitcher } from 'components/Books';
-import { Pagination, Title } from 'components/common';
+import { Loading, Pagination, Title } from 'components/common';
 import { useBooks } from 'hooks/useBooks';
 
 const Books = () => {
-  const { books, pagination } = useBooks();
+  const { books, pagination, isBooksLoading, isEmpty } = useBooks();
 
   return (
     <>
@@ -15,8 +15,8 @@ const Books = () => {
           <BooksFilter />
           <BooksViewSwitcher />
         </div>
-
-        {books.length > 0 ? (
+        {isBooksLoading && <Loading />}
+        {books && !isEmpty ? (
           <>
             <BookList list={books} />
             <Pagination pagination={pagination} />
