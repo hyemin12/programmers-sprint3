@@ -16,7 +16,7 @@ const Books = () => {
           <BooksViewSwitcher />
         </div>
 
-        {books.length > 0 ? (
+        {books && books.length > 0 ? (
           <>
             <BookList list={books} />
             <Pagination pagination={pagination} />

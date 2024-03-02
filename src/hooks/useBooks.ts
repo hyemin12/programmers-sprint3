@@ -1,34 +1,36 @@
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { fetchBooks } from 'api/book.api';
 import { LIMIT } from 'constance/pagination';
 import { QUERYSTRING } from 'constance/querystring';
-import { IBook } from 'models/book.model';
-import { IPagination } from 'models/pagination.model';
 
 export const useBooks = () => {
   const { search } = useLocation();
 
-  const [books, setBooks] = useState<IBook[]>([]);
-  const [pagination, setPagination] = useState<IPagination>({ total_count: 0, current_page: 1 });
+  const params = new URLSearchParams(search);
 
-  useEffect(() => {
-    const params = new URLSearchParams(search);
-
+  const fetchBooksData = () => {
     const categoryIdParams = params.get(QUERYSTRING.CATEGORY_ID);
     const newsParams = params.get(QUERYSTRING.NEWS);
     const currentPageParams = params.get(QUERYSTRING.PAGE);
 
-    fetchBooks({
+    return fetchBooks({
       category_id: categoryIdParams ? Number(categoryIdParams) : undefined,
       new: newsParams ? true : undefined,
       page: currentPageParams ? Number(currentPageParams) : 1,
       limit: LIMIT,
-    }).then((res) => {
-      setBooks(res.lists);
-      setPagination(res.pagination);
     });
-  }, [search]);
+  };
 
-  return { books, pagination };
+  const { data: booksData, isLoading: isBooksLoading } = useQuery({
+    queryKey: ['books', search],
+    queryFn: fetchBooksData,
+  });
+
+  return {
+    books: booksData?.lists,
+    pagination: booksData?.pagination,
+    isEmpty: booksData?.lists.length === 0,
+    isBooksLoading,
+  };
 };
