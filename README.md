@@ -4,6 +4,12 @@
 
 - React
 - Typescript
+- styled-components
+- zustand
+- tanstack query(react query)
+- react-hook-form
+- axios
+- Dayjs
 
 ## 💡실행 방법
 
