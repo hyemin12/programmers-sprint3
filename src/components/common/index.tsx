@@ -8,3 +8,4 @@ export { default as ThemeSwitcher } from './ThemeSwitcher';
 export { default as QuantityBox } from './QuantityBox';
 export { default as Empty } from './Empty';
 export { default as LikesButton } from './LikesButton';
+export { default as Loading } from './Loading';
