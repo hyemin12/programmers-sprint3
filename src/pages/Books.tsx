@@ -5,7 +5,7 @@ import { Loading, Pagination, Title } from 'components/common';
 import { useBooks } from 'hooks/useBooks';
 
 const Books = () => {
-  const { books, pagination, isBooksLoading } = useBooks();
+  const { books, pagination, isBooksLoading, isEmpty } = useBooks();
 
   return (
     <>
@@ -16,7 +16,7 @@ const Books = () => {
           <BooksViewSwitcher />
         </div>
         {isBooksLoading && <Loading />}
-        {books && books.length > 0 ? (
+        {books && !isEmpty ? (
           <>
             <BookList list={books} />
             <Pagination pagination={pagination} />
