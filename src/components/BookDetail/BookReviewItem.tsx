@@ -15,7 +15,7 @@ const ReviewStar = ({ score }: { score: number }) => {
   return (
     <span className="star">
       {Array.from({ length: 5 }).map((_, idx) => (
-        <FaStar key={idx} className={idx < score ? 'fill' : 'empty'} />
+        <FaStar key={idx} className={idx < score ? 'fill' : 'star-empty'} />
       ))}
     </span>
   );
@@ -43,7 +43,8 @@ const BookReviewStyle = styled.div`
   gap: 12px;
   padding: 12px;
   border-radius: ${({ theme }) => theme.borderRadius.default};
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid ${({ theme }) => theme.color.border};
+
   header {
     display: flex;
     justify-content: space-between;

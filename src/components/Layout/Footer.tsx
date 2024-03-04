@@ -20,7 +20,7 @@ const FooterStyle = styled.footer`
   max-width: ${({ theme }) => theme.layout.width.large};
   margin: 0 auto;
   padding: 20px 0;
-  border-top: 1px solid ${({ theme }) => theme.color.background};
+  border-top: 1px solid ${({ theme }) => theme.color.border};
 
   .copyright {
     font-size: 0.75em;

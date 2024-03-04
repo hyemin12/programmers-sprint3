@@ -18,8 +18,12 @@ const LikesButton = ({ likes, liked, onClick }: LikesButtonProps) => {
 };
 const LikesButtonStyle = styled(Button)`
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
+  background-color: transparent;
+  border: 1px solid ${({ theme }) => theme.color.border};
+  color: ${({ theme }) => theme.color.secondary};
   svg {
     color: inherit;
     * {

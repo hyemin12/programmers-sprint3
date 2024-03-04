@@ -25,7 +25,7 @@ const QuantityBox = ({ handleIncrease, handleDecrease, quantity }: QuantityBoxPr
 };
 
 const QuantityBoxStyle = styled.div`
-  width: calc(33px * 3);
+  width: calc(32px * 3);
   height: 32px;
   border-radius: ${({ theme }) => theme.borderRadius.default};
   border: 1px solid ${({ theme }) => theme.color.border};
@@ -34,11 +34,14 @@ const QuantityBoxStyle = styled.div`
   input {
     width: 32px;
     height: 32px;
+    background-color: #fff;
+    border-radius: 0;
     padding: 0;
     text-align: center;
   }
   input {
     border: none;
+    color: #111;
     &:focus {
       border: none;
       outline: none;

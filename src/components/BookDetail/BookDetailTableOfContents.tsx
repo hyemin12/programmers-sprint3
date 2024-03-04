@@ -3,7 +3,7 @@ import { Title, EllipsisBox } from 'components/common';
 const BookDetailTableOfContents = ({ index }: { index: string | undefined }) => {
   if (!index) return null;
   return (
-    <>
+    <section>
       <Title size="medium">목차</Title>
       <EllipsisBox line={5} $expanded>
         {index
@@ -25,7 +25,7 @@ const BookDetailTableOfContents = ({ index }: { index: string | undefined }) => 
             }
           })}
       </EllipsisBox>
-    </>
+    </section>
   );
 };
 

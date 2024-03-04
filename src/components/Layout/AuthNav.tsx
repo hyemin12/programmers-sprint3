@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 
 import useAuthStore from 'store/auth.store';
-import { AuthNavStyle } from 'style/AuthNav.styles';
+import { AuthNavStyle } from 'components/Layout/AuthNav.styles';
 import useCartStore from 'store/cart.store';
 import { useAuth } from 'hooks/useAuth';
 

@@ -9,6 +9,7 @@ import { ICart } from 'models/cart.model';
 import { formatNumber } from 'utils/format';
 import { updateQuantity } from 'api/carts.api';
 import useCartStore from 'store/cart.store';
+import { CartItemStyle } from 'components/Cart/CartItem.styles';
 
 interface CartItemProps {
   cart: ICart;
@@ -58,6 +59,8 @@ const CartItem = ({ cart }: CartItemProps) => {
       <div className="info">
         <div className="title-box">
           <CheckIconButton isChecked={isChecked} onClick={handleSelectedItem} />
+
+          {/* 제품명 */}
           <div className="product">
             <Link to={`/books/${book_id}`}>
               <Title size="medium" color="text">
@@ -68,6 +71,7 @@ const CartItem = ({ cart }: CartItemProps) => {
             <p className="price">{formatNumber(price)}원</p>
           </div>
         </div>
+        {/* 제품 수량*/}
         <div className="price-quantity-wrapper">
           <p className="total-price">{formatNumber(price * quantity)}원</p>
           <QuantityBox
@@ -84,40 +88,5 @@ const CartItem = ({ cart }: CartItemProps) => {
     </CartItemStyle>
   );
 };
-
-const CartItemStyle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  border-top: 1px solid ${({ theme }) => theme.color.border};
-  &:last-child {
-    border-bottom: 1px solid ${({ theme }) => theme.color.border};
-  }
-  p {
-    margin-bottom: 8px;
-  }
-  .info {
-    display: flex;
-    align-items: start;
-    .title-box {
-      display: flex;
-      align-items: start;
-      padding: 24px 24px 24px 12px;
-    }
-  }
-  .price-quantity-wrapper {
-    padding: 24px;
-    border-left: 1px solid ${({ theme }) => theme.color.border};
-    border-right: 1px solid ${({ theme }) => theme.color.border};
-    .total-price {
-      font-weight: bold;
-      text-align: center;
-    }
-  }
-  .delete {
-    padding: 12px;
-    cursor: pointer;
-  }
-`;
 
 export default CartItem;

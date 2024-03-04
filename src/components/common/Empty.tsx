@@ -10,7 +10,7 @@ interface EmptyProps {
 
 const Empty = ({ icon, title, description }: EmptyProps) => {
   return (
-    <EmptyStyle>
+    <EmptyStyle className="empty">
       {icon && <div className="icon">{icon}</div>}
 
       <Title size="large" color="secondary">

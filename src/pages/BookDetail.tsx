@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { useBook } from 'hooks/useBook';
 import { IBookDetail } from 'models/book.model';
@@ -10,7 +11,7 @@ import {
   BookDetailIntroduction,
   BookReviewList,
 } from 'components/BookDetail';
-import { BookDetailStyle } from 'style/BookDetail.styles';
+import { Loading } from 'components/common';
 
 export interface BookInfo {
   label: string;
@@ -24,7 +25,7 @@ const bookInfoList: BookInfo[] = [
     key: 'category_name',
     filter: (book: IBookDetail) => <Link to={`/books?category_id=${book.category_id}`}>{book.category_name}</Link>,
   },
-  { label: '포맷', key: 'form' },
+  { label: '타입', key: 'form', filter: (book: IBookDetail) => (book.form === 'paper' ? '종이책' : 'eBook') },
   { label: '페이지', key: 'pages' },
   { label: 'ISBN', key: 'isbn' },
   { label: '출간일', key: 'published_at', filter: (book: IBookDetail) => formatDate(book.published_at) },
@@ -33,13 +34,14 @@ const bookInfoList: BookInfo[] = [
 
 const BookDetail = () => {
   const { bookId } = useParams();
-  const { book, reviews, likeToggle, addReview } = useBook(bookId);
-  console.log(reviews);
+  const { book, reviews, toggleLike, addReview, isBookLoading } = useBook(bookId);
+
   if (book === null) return null;
+  if (isBookLoading) return <Loading />;
   const { description, index } = book;
   return (
     <BookDetailStyle>
-      <BookDetailHeader book={book} bookInfoList={bookInfoList} likeToggle={likeToggle} />
+      <BookDetailHeader book={book} bookInfoList={bookInfoList} toggleLike={toggleLike} />
 
       <BookDetailIntroduction description={description} />
       <BookDetailTableOfContents index={index} />
@@ -48,4 +50,14 @@ const BookDetail = () => {
   );
 };
 
+const BookDetailStyle = styled.div`
+  .content {
+    > div {
+      padding: 18px 0%;
+    }
+  }
+  section {
+    padding: 20px 0;
+  }
+`;
 export default BookDetail;

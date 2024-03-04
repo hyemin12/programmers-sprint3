@@ -9,11 +9,15 @@ import { fetchBestSeller, fetchBooks } from 'api/book.api';
 import { LIMIT } from 'constance/pagination';
 import { IBook } from 'models/book.model';
 import { BookList } from 'components/Books';
+import useCartStore from 'store/cart.store';
+import useAuthStore from 'store/auth.store';
 
 function Home() {
   const [newBooks, setNewBooks] = useState<IBook[]>([]);
   const [bestSellerBooks, setBestSellerBooks] = useState<IBook[]>([]);
   const category = useCategory();
+  const { fetchCartItems } = useCartStore();
+  const { isLoggedIn } = useAuthStore();
 
   useEffect(() => {
     fetchBooks({
@@ -23,6 +27,9 @@ function Home() {
       limit: LIMIT,
     }).then((res) => setNewBooks(res.list));
     fetchBestSeller().then((res) => setBestSellerBooks(res));
+    if (isLoggedIn) {
+      fetchCartItems();
+    }
   }, []);
 
   return (
