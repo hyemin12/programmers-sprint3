@@ -35,8 +35,9 @@ const BookReviewList = ({ reviews, onAdd }: BookReviewListProps) => {
         </div>
       </div>
       <BookReviewAdd onAdd={onAdd} isAddMode={isAddMode} setIsAddMode={setIsAddMode} />
-
-      {reviews.length > 0 && reviews.map((review) => <BookReviewItem key={review.id} review={review} />)}
+      <div className="reviews">
+        {reviews.length > 0 && reviews.map((review) => <BookReviewItem key={review.id} review={review} />)}
+      </div>
       {reviews.length === 0 && <Empty icon={<FaSmileWink />} title="등록된 리뷰가 없습니다." />}
     </BookReviewListStyle>
   );
