@@ -1,8 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { FaHeart } from 'react-icons/fa';
 
-import { EllipsisBox } from 'components/common';
+import { EllipsisBox, LazyImage, LikesButton } from 'components/common';
 import { ViewMode } from '../BooksViewSwitcher';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
@@ -15,26 +14,29 @@ interface BooksItemProps {
 
 const BooksItem = ({ book, view }: BooksItemProps) => {
   const { pathname } = useLocation();
+  if (!book) return null;
+  const { id, img, title, summary, author, price, likes, liked } = book;
   return (
     <BooksItemStyle view={view}>
-      <Link to={`/books/${book.id}`}>
+      <Link to={`/books/${id}`}>
         <div className="img">
-          <img src={getImgSrc(book.img)} alt={book.title} />
+          <LazyImage src={getImgSrc(img)} alt={title} />
         </div>
+
         <div className="content">
           <h2 className="title">
-            <EllipsisBox line={2}>{book.title}</EllipsisBox>
+            <EllipsisBox line={2}>{title}</EllipsisBox>
           </h2>
           <EllipsisBox line={2}>
-            <p className="summary">{book.summary}</p>
+            <p className="summary">{summary}</p>
           </EllipsisBox>
 
-          <p className="author">{book.author}</p>
-          <p className="price">{formatNumber(book.price)}원</p>
+          <p className="author">{author}</p>
+          <p className="price">{formatNumber(price)}원</p>
+
           {pathname !== '/search' && (
             <div className="likes">
-              <FaHeart />
-              <span>{book.likes}</span>
+              <LikesButton liked={liked ? liked : false} likes={likes} onClick={() => {}} />
             </div>
           )}
         </div>
@@ -86,22 +88,9 @@ const BooksItemStyle = styled.div<{ view: ViewMode }>`
     }
   }
   .likes {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin: 0 0 4px 0;
-    padding: 4px 12px;
-    border: 1px solid ${({ theme }) => theme.color.border};
-    border-radius: ${({ theme }) => theme.borderRadius.default};
-    font-size: 0%.875rem;
-    font-weight: bold;
-    color: ${({ theme }) => theme.color.primary};
     position: absolute;
     right: 16px;
     bottom: 16px;
-    svg {
-      fill: ${({ theme }) => theme.color.primary};
-    }
   }
 `;
 

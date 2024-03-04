@@ -14,6 +14,7 @@ export interface IBook {
   contents: string;
   price: number;
   likes: number;
+  liked?: boolean;
   published_at: string;
 }
 
@@ -22,7 +23,6 @@ export interface IBookDetail extends IBook {
   bestSellers?: [];
   author: string;
   category_name: string;
-  liked?: boolean;
 }
 
 export interface IReviews {
