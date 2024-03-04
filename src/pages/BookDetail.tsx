@@ -24,7 +24,7 @@ const bookInfoList: BookInfo[] = [
     key: 'category_name',
     filter: (book: IBookDetail) => <Link to={`/books?category_id=${book.category_id}`}>{book.category_name}</Link>,
   },
-  { label: '포맷', key: 'form' },
+  { label: '타입', key: 'form', filter: (book: IBookDetail) => (book.form === 'paper' ? '종이책' : 'eBook') },
   { label: '페이지', key: 'pages' },
   { label: 'ISBN', key: 'isbn' },
   { label: '출간일', key: 'published_at', filter: (book: IBookDetail) => formatDate(book.published_at) },

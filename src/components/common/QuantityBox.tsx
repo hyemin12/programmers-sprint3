@@ -34,6 +34,7 @@ const QuantityBoxStyle = styled.div`
   input {
     width: 32px;
     height: 32px;
+    background-color: #fff;
     padding: 0;
     text-align: center;
   }

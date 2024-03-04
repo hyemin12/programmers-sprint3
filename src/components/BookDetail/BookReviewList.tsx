@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { FaPencilAlt } from 'react-icons/fa';
+import { FaPencilAlt, FaSmileWink } from 'react-icons/fa';
 
-import { Button, Title } from 'components/common';
+import { Button, Empty, Title } from 'components/common';
 import { IReviews, IReviewsPayload } from 'models/book.model';
 import BookReviewItem from './BookReviewItem';
 import BookReviewAdd from './BookReviewAdd';
@@ -37,6 +37,7 @@ const BookReviewList = ({ reviews, onAdd }: BookReviewListProps) => {
       <BookReviewAdd onAdd={onAdd} isAddMode={isAddMode} setIsAddMode={setIsAddMode} />
 
       {reviews.length > 0 && reviews.map((review) => <BookReviewItem key={review.id} review={review} />)}
+      {reviews.length === 0 && <Empty icon={<FaSmileWink />} title="등록된 리뷰가 없습니다." />}
     </BookReviewListStyle>
   );
 };
@@ -53,6 +54,12 @@ const BookReviewListStyle = styled.section`
       margin-right: 6px;
       font-size: 0.85rem;
       fill: #fff;
+    }
+  }
+  .empty {
+    padding: 50px 0%;
+    h1 {
+      ${({ theme }) => theme.heading.medium};
     }
   }
 `;

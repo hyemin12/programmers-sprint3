@@ -8,7 +8,7 @@ import { AddToCartButton } from 'components/BookDetail';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import { IBookDetail } from 'models/book.model';
-import { AddToCartStyle } from 'style/BookDetail.styles';
+import { ButtonGroup, DetailHeaderStyle, QuantityBoxStyle } from 'style/BookDetail.styles';
 
 interface BookDetailHeaderProps {
   book: IBookDetail;
@@ -33,7 +33,7 @@ const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderPr
 
   const { img, title, subTitle, summary, liked, likes, price } = book;
   return (
-    <header>
+    <DetailHeaderStyle>
       <div className="img">
         <img src={getImgSrc(img)} alt={title} />
       </div>
@@ -53,27 +53,26 @@ const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderPr
           </dl>
         ))}
 
-        <p className="summary">{summary}</p>
-        <LikesButton likes={likes} liked={liked ? liked : false} onClick={likeToggle} />
-
-        {/* 장바구니 추가 섹션 */}
-        <AddToCartStyle>
-          <span className="total-price">
-            총 금액 <h4>{formatNumber(price)}원</h4>
-          </span>
-
-          <div className="button-box">
+        <QuantityBoxStyle>
+          <h4>수량</h4>
+          <div>
             <QuantityBox
               quantity={quantity}
               handleOnchange={handleChange}
               handleDecrease={handleDecrease}
               handleIncrease={handleIncrease}
             />
-            <AddToCartButton book={book} quantity={quantity} />
+            <span className="total-price">{formatNumber(price * quantity)}원</span>
           </div>
-        </AddToCartStyle>
+        </QuantityBoxStyle>
+
+        {/* 장바구니 추가 섹션 */}
+        <ButtonGroup>
+          <AddToCartButton book={book} quantity={quantity} />
+          <LikesButton likes={likes} liked={liked ? liked : false} onClick={likeToggle} />
+        </ButtonGroup>
       </div>
-    </header>
+    </DetailHeaderStyle>
   );
 };
 
