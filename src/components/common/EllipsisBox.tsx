@@ -29,19 +29,17 @@ const EllipsisBox = ({ line, children, $expanded = false }: EllipsisBoxProps) =>
   }, []);
 
   return (
-    <>
+    <EllipsisBoxStyle $expanded={expanded} $line={line}>
       <div ref={ellipsisTextRef}>{children}</div>
-      <EllipsisBoxStyle $expanded={expanded} $line={line}>
-        {overflowText && (
-          <div className="toggle">
-            <Button size="small" scheme="default" onClick={() => setExpanded(!expanded)}>
-              <FaAngleDown />
-              {expanded ? '접기' : '펼쳐보기'}
-            </Button>
-          </div>
-        )}
-      </EllipsisBoxStyle>
-    </>
+      {overflowText && (
+        <div className="toggle">
+          <Button size="small" scheme="default" onClick={() => setExpanded(!expanded)}>
+            <FaAngleDown />
+            {expanded ? '접기' : '펼쳐보기'}
+          </Button>
+        </div>
+      )}
+    </EllipsisBoxStyle>
   );
 };
 const EllipsisBoxStyle = styled.div<{ $line: number; $expanded: boolean }>`
