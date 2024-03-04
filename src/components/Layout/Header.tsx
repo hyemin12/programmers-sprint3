@@ -34,7 +34,7 @@ const HeaderStyle = styled.header`
   /* max-width: ${({ theme }) => theme.layout.width.large}; */
   /* margin: 0 auto; */
   padding: 20px 0;
-  border-bottom: 1px solid ${({ theme }) => theme.color.background};
+  border-bottom: 1px solid ${({ theme }) => theme.color.border};
   .search-wrapper {
     display: flex;
     align-items: center;

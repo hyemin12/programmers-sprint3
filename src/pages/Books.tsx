@@ -9,7 +9,9 @@ const Books = () => {
 
   return (
     <>
-      <Title size="large">도서 검색 결과</Title>
+      <Title size="large" color="text">
+        도서 검색 결과
+      </Title>
       <BookStyle>
         <div className="filter">
           <BooksFilter />

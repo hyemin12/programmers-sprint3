@@ -43,7 +43,7 @@ export const DetailHeaderStyle = styled.header`
 `;
 
 export const QuantityBoxStyle = styled.div`
-  background-color: #f4f4f4;
+  background-color: ${({ theme }) => theme.color.third};
   border-radius: ${({ theme }) => theme.borderRadius.default};
   margin-top: 24px;
   padding: 24px;

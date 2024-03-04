@@ -54,8 +54,10 @@ const SearchBoxStyle = styled.div`
     input {
       width: 100%;
       padding: 8px 18px;
+      background-color: transparent;
       border: 1px solid ${({ theme }) => theme.color.border};
       border-radius: 32px;
+      color: ${({ theme }) => theme.color.text};
     }
     button {
       font-size: 1rem;
