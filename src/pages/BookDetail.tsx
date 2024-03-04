@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { useBook } from 'hooks/useBook';
 import { IBookDetail } from 'models/book.model';
@@ -10,7 +11,6 @@ import {
   BookDetailIntroduction,
   BookReviewList,
 } from 'components/BookDetail';
-import { BookDetailStyle } from 'style/BookDetail.styles';
 
 export interface BookInfo {
   label: string;
@@ -48,4 +48,14 @@ const BookDetail = () => {
   );
 };
 
+const BookDetailStyle = styled.div`
+  .content {
+    > div {
+      padding: 18px 0%;
+    }
+  }
+  section {
+    padding: 20px 0;
+  }
+`;
 export default BookDetail;
