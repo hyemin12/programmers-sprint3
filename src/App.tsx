@@ -10,7 +10,6 @@ function App() {
     <div className="App">
       <QueryClientProvider client={queryClient}>
         <BookStoreThemeProvider>
-          <ThemeSwitcher />
           <RouterProvider router={router} />
         </BookStoreThemeProvider>
       </QueryClientProvider>
