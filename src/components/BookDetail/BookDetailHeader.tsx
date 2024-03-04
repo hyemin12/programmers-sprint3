@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import { BookInfo } from 'pages/BookDetail';
 import QuantityBox from 'components/common/QuantityBox';
-import { Title, LikesButton } from 'components/common';
+import { Title, LikesButton, LazyImage } from 'components/common';
 import { AddToCartButton } from 'components/BookDetail';
 
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import { IBookDetail } from 'models/book.model';
-import { ButtonGroup, DetailHeaderStyle, QuantityBoxStyle } from 'style/BookDetail.styles';
+import { ButtonGroup, DetailHeaderStyle, QuantityBoxStyle } from 'components/BookDetail/BookDetailHeader.styles';
 
 interface BookDetailHeaderProps {
   book: IBookDetail;
@@ -31,12 +31,11 @@ const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderPr
     setQuantity(quantity - 1);
   };
 
-  const { img, title, subTitle, summary, liked, likes, price } = book;
+  const { img, title, subTitle, liked, likes, price } = book;
   return (
     <DetailHeaderStyle>
-      <div className="img">
-        <img src={getImgSrc(img)} alt={title} />
-      </div>
+      <LazyImage src={getImgSrc(img)} alt={title} />
+
       <div className="info">
         <div className="title-wrapper">
           <Title size="large" color="text">
