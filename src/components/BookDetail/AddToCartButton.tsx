@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from 'components/common';
 import useCartStore from 'store/cart.store';
-import useAuthStore from 'store/auth.store';
-import { useAlert } from 'hooks/useAlert';
 import { IBookDetail } from 'models/book.model';
+import { useRequireLogin } from 'hooks/useRequireLogin';
 
 interface AddToCartButtonProps {
   book: IBookDetail;
@@ -15,18 +14,12 @@ interface AddToCartButtonProps {
 const AddToCartButton = ({ book, quantity }: AddToCartButtonProps) => {
   const [cartAdded, setCartAdded] = useState(false);
   const { addCartItem } = useCartStore();
-  const { isLoggedIn } = useAuthStore();
-  const { showAlert } = useAlert();
-  const navigate = useNavigate();
+  const { requireLogin } = useRequireLogin();
 
   const handleAddCart = async () => {
     if (!book) return;
 
-    if (!isLoggedIn) {
-      showAlert('로그인이 필요합니다.');
-      navigate('/login');
-      return;
-    }
+    if (!requireLogin()) return;
 
     const data = {
       book_id: book.id,

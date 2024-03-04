@@ -4,7 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 import { useBook } from 'hooks/useBook';
 import { IBookDetail } from 'models/book.model';
 import { formatDate, formatNumber } from 'utils/format';
-import { BookDetailHeader, BookDetailTableOfContents, BookDetailIntroduction } from 'components/BookDetail';
+import {
+  BookDetailHeader,
+  BookDetailTableOfContents,
+  BookDetailIntroduction,
+  BookReviewList,
+} from 'components/BookDetail';
 import { BookDetailStyle } from 'style/BookDetail.styles';
 
 export interface BookInfo {
@@ -28,9 +33,8 @@ const bookInfoList: BookInfo[] = [
 
 const BookDetail = () => {
   const { bookId } = useParams();
-  const { book, likeToggle } = useBook(bookId);
-  console.log(book);
-
+  const { book, reviews, likeToggle, addReview } = useBook(bookId);
+  console.log(reviews);
   if (book === null) return null;
   const { description, index } = book;
   return (
@@ -39,6 +43,7 @@ const BookDetail = () => {
 
       <BookDetailIntroduction description={description} />
       <BookDetailTableOfContents index={index} />
+      <BookReviewList reviews={reviews} onAdd={addReview} />
     </BookDetailStyle>
   );
 };
