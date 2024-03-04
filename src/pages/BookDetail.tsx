@@ -33,7 +33,7 @@ const bookInfoList: BookInfo[] = [
 
 const BookDetail = () => {
   const { bookId } = useParams();
-  const { book, reviews, likeToggle } = useBook(bookId);
+  const { book, reviews, likeToggle, addReview } = useBook(bookId);
   console.log(reviews);
   if (book === null) return null;
   const { description, index } = book;
@@ -43,7 +43,7 @@ const BookDetail = () => {
 
       <BookDetailIntroduction description={description} />
       <BookDetailTableOfContents index={index} />
-      <BookReviewList reviews={reviews} />
+      <BookReviewList reviews={reviews} onAdd={addReview} />
     </BookDetailStyle>
   );
 };

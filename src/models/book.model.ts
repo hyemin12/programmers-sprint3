@@ -32,3 +32,5 @@ export interface IReviews {
   created_at: string;
   score: number;
 }
+
+export type IReviewsPayload = Pick<IReviews, 'content' | 'created_at' | 'score'>;

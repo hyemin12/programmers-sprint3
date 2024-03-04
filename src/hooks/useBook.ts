@@ -1,33 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { IBookDetail, IReviews } from 'models/book.model';
+import { IBookDetail, IReviews, IReviewsPayload } from 'models/book.model';
 import { fetchBook, likeBook, unlikeBook } from 'api/book.api';
-import { useAlert } from './useAlert';
-import useAuthStore from 'store/auth.store';
-import { fetchBooksReview } from 'api/review.api';
+import { addBookReview, fetchBooksReview } from 'api/review.api';
+import { useRequireLogin } from './useRequireLogin';
+import { UseFormReset } from 'react-hook-form';
 
 export const useBook = (bookId: string | undefined) => {
   const [book, setBook] = useState<IBookDetail | null>(null);
   const [reviews, setReviews] = useState<IReviews[]>([]);
-  const { showAlert } = useAlert();
-  const navigate = useNavigate();
-  const { isLoggedIn } = useAuthStore();
+  const { requireLogin } = useRequireLogin();
 
   const likeToggle = () => {
     if (!book) return;
 
-    // 로그인 되지 않은 경우
-    if (!isLoggedIn) {
-      showAlert('로그인이 필요합니다.');
-      navigate('/login');
-      return;
-    }
+    if (!requireLogin()) return;
 
     if (book.liked) {
       unlikeBook(book.id).then(() => setBook({ ...book, liked: false, likes: book.likes - 1 }));
     } else {
       likeBook(book.id).then(() => setBook({ ...book, liked: true, likes: book.likes + 1 }));
     }
+  };
+
+  const addReview = (data: IReviewsPayload) => {
+    if (!bookId) return;
+
+    addBookReview(bookId.toString(), data).then(() => {
+      fetchBooksReview(bookId).then((reviews) => {
+        setReviews(reviews);
+      });
+    });
   };
 
   useEffect(() => {
@@ -42,5 +44,5 @@ export const useBook = (bookId: string | undefined) => {
     });
   }, [bookId]);
 
-  return { book, likeToggle, reviews };
+  return { book, likeToggle, reviews, addReview };
 };
