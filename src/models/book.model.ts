@@ -24,3 +24,11 @@ export interface IBookDetail extends IBook {
   category_name: string;
   liked?: boolean;
 }
+
+export interface IReviews {
+  id: number;
+  user_name: string;
+  content: string;
+  created_at: string;
+  score: number;
+}

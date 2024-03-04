@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IBookDetail } from 'models/book.model';
+import { IBookDetail, IReviews } from 'models/book.model';
 import { fetchBook, likeBook, unlikeBook } from 'api/book.api';
 import { useAlert } from './useAlert';
 import useAuthStore from 'store/auth.store';
+import { fetchBooksReview } from 'api/review.api';
 
 export const useBook = (bookId: string | undefined) => {
   const [book, setBook] = useState<IBookDetail | null>(null);
+  const [reviews, setReviews] = useState<IReviews[]>([]);
   const { showAlert } = useAlert();
   const navigate = useNavigate();
   const { isLoggedIn } = useAuthStore();
@@ -34,7 +36,11 @@ export const useBook = (bookId: string | undefined) => {
     fetchBook(bookId).then((book) => {
       setBook(book);
     });
+
+    fetchBooksReview(bookId).then((res) => {
+      setReviews(res);
+    });
   }, [bookId]);
 
-  return { book, likeToggle };
+  return { book, likeToggle, reviews };
 };
