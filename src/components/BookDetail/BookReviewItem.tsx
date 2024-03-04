@@ -15,7 +15,7 @@ const ReviewStar = ({ score }: { score: number }) => {
   return (
     <span className="star">
       {Array.from({ length: 5 }).map((_, idx) => (
-        <FaStar key={idx} className={idx < score ? 'fill' : 'empty'} />
+        <FaStar key={idx} className={idx < score ? 'fill' : 'star-empty'} />
       ))}
     </span>
   );
