@@ -34,7 +34,7 @@ const bookInfoList: BookInfo[] = [
 const BookDetail = () => {
   const { bookId } = useParams();
   const { book, reviews, likeToggle, addReview } = useBook(bookId);
-  console.log(reviews);
+
   if (book === null) return null;
   const { description, index } = book;
   return (

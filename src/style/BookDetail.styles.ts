@@ -46,6 +46,9 @@ export const BookDetailStyle = styled.div`
       padding: 18px 0%;
     }
   }
+  section {
+    padding: 20px 0;
+  }
 `;
 
 export const AddToCartStyle = styled.div`
