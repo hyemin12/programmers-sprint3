@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button } from 'components/common';
 import useCartStore from 'store/cart.store';
 import { IBookDetail } from 'models/book.model';
-import { requireLogin } from 'utils/requireLogin';
+import { useRequireLogin } from 'hooks/useRequireLogin';
 
 interface AddToCartButtonProps {
   book: IBookDetail;
@@ -14,11 +14,12 @@ interface AddToCartButtonProps {
 const AddToCartButton = ({ book, quantity }: AddToCartButtonProps) => {
   const [cartAdded, setCartAdded] = useState(false);
   const { addCartItem } = useCartStore();
+  const { requireLogin } = useRequireLogin();
 
   const handleAddCart = async () => {
     if (!book) return;
 
-    requireLogin();
+    if (!requireLogin()) return;
 
     const data = {
       book_id: book.id,
