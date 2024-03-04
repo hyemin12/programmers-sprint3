@@ -13,10 +13,10 @@ import { ButtonGroup, DetailHeaderStyle, QuantityBoxStyle } from 'components/Boo
 interface BookDetailHeaderProps {
   book: IBookDetail;
   bookInfoList: BookInfo[];
-  likeToggle: () => void;
+  toggleLike: () => void;
 }
 
-const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderProps) => {
+const BookDetailHeader = ({ book, bookInfoList, toggleLike }: BookDetailHeaderProps) => {
   if (!book) return null;
 
   const [quantity, setQuantity] = useState<number>(1);
@@ -68,7 +68,7 @@ const BookDetailHeader = ({ book, bookInfoList, likeToggle }: BookDetailHeaderPr
         {/* 장바구니 추가 섹션 */}
         <ButtonGroup>
           <AddToCartButton book={book} quantity={quantity} />
-          <LikesButton likes={likes} liked={liked ? liked : false} onClick={likeToggle} />
+          <LikesButton likes={likes} liked={liked ? liked : false} onClick={toggleLike} />
         </ButtonGroup>
       </div>
     </DetailHeaderStyle>

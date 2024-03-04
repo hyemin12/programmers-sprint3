@@ -6,6 +6,7 @@ import { ViewMode } from '../BooksViewSwitcher';
 import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import { IBook } from 'models/book.model';
+import { useBook } from 'hooks/useBook';
 
 interface BooksItemProps {
   book: IBook;
@@ -14,6 +15,7 @@ interface BooksItemProps {
 
 const BooksItem = ({ book, view }: BooksItemProps) => {
   const { pathname } = useLocation();
+
   if (!book) return null;
   const { id, img, title, summary, author, price, likes, liked } = book;
   return (
