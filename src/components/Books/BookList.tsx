@@ -6,7 +6,7 @@ import { QUERYSTRING } from 'constance/querystring';
 import { IBook } from 'models/book.model';
 import { BookItem } from 'components/Books';
 import { ViewMode } from './BooksViewSwitcher';
-import BestSellerBookItem from 'components/Home/BestSellerBookItem';
+import { BestSellerBookItem } from 'components/Home';
 
 interface BooksListProps {
   list: IBook[];
