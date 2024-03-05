@@ -4,21 +4,22 @@ import styled from 'styled-components';
 
 import { useCategory } from 'hooks/useCategory';
 import { VisualSlide } from 'components/Home';
-import { Title } from 'components/common';
-import { fetchBestSeller, fetchBooks } from 'api/book.api';
+import { Loading, Title } from 'components/common';
+import { fetchBooks } from 'api/book.api';
 import { LIMIT } from 'constance/pagination';
 import { IBook } from 'models/book.model';
 import { BookList } from 'components/Books';
 import useCartStore from 'store/cart.store';
 import useAuthStore from 'store/auth.store';
+import { useBooksInfinite } from 'hooks/useBooksInfinite';
 
 function Home() {
   const [newBooks, setNewBooks] = useState<IBook[]>([]);
-  const [bestSellerBooks, setBestSellerBooks] = useState<IBook[]>([]);
   const category = useCategory();
   const { fetchCartItems } = useCartStore();
   const { isLoggedIn } = useAuthStore();
-
+  const { bestSellerBooks, isFetching, fetchNextPage, hasNextPage } = useBooksInfinite();
+  console.log(bestSellerBooks, newBooks);
   useEffect(() => {
     fetchBooks({
       category_id: undefined,
@@ -26,7 +27,7 @@ function Home() {
       page: 1,
       limit: LIMIT,
     }).then((res) => setNewBooks(res.list));
-    fetchBestSeller().then((res) => setBestSellerBooks(res));
+
     if (isLoggedIn) {
       fetchCartItems();
     }
@@ -50,6 +51,7 @@ function Home() {
           })}
         </ul>
       </div>
+      {isFetching && <Loading />}
       {newBooks && (
         <div className="new-books">
           <Title size="large" color="primary">
@@ -63,9 +65,12 @@ function Home() {
           <Title size="large" color="primary">
             인기 도서 안내
           </Title>
-          <BookList list={bestSellerBooks} />
+          <BookList list={bestSellerBooks} isBestseller />
         </div>
       )}
+      <button className="more" disabled={!hasNextPage} onClick={() => fetchNextPage()}>
+        더보기
+      </button>
     </HomeStyle>
   );
 }

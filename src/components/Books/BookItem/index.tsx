@@ -53,7 +53,7 @@ const textStyle = css`
   margin: 0 0 4px 0;
 `;
 
-const BooksItemStyle = styled.div<{ view: ViewMode }>`
+export const BooksItemStyle = styled.div<{ view: ViewMode }>`
   a {
     display: flex;
     flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};

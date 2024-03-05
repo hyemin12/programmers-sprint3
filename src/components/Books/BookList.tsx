@@ -6,12 +6,14 @@ import { QUERYSTRING } from 'constance/querystring';
 import { IBook } from 'models/book.model';
 import { BookItem } from 'components/Books';
 import { ViewMode } from './BooksViewSwitcher';
+import BestSellerBookItem from 'components/Home/BestSellerBookItem';
 
 interface BooksListProps {
   list: IBook[];
+  isBestseller?: boolean;
 }
 
-const BooksList = ({ list }: BooksListProps) => {
+const BooksList = ({ list, isBestseller = false }: BooksListProps) => {
   const [view, setView] = useState<ViewMode>('grid');
   const { search } = useLocation();
 
@@ -25,9 +27,13 @@ const BooksList = ({ list }: BooksListProps) => {
 
   return (
     <BookListStyle view={view}>
-      {list.map((item) => (
-        <BookItem book={item} key={item.id} view={view} />
-      ))}
+      {list.map((item) =>
+        isBestseller ? (
+          <BestSellerBookItem book={item} key={item.id} />
+        ) : (
+          <BookItem book={item} key={item.id} view={view} />
+        ),
+      )}
     </BookListStyle>
   );
 };
