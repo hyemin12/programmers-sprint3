@@ -53,5 +53,8 @@ export const requestHandler = async <T>(method: RequestMethod, endPoint: string,
 
   // 도서 목록, 검색 도서 목록일 경우 response.data 반환하도록 설정
   if ((endPoint === '/books' || endPoint === '/books/search') && method === 'get') return response.data;
+
+  // 베스트 셀러일 경우, pagination이 결과값에 있다면 response.data 반환하도록 설정
+  if (endPoint === '/books/best' && response.data.pagination) return response.data;
   return response.data?.lists || response.data;
 };

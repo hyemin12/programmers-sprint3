@@ -5,8 +5,9 @@ export const DetailHeaderStyle = styled.header`
   align-items: start;
   gap: 24px;
   padding: 0 0 24px 0;
-  .lazy-img {
+  .book-img {
     flex: 1;
+    cursor: pointer;
     img {
       width: 100%;
       height: auto;

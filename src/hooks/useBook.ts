@@ -57,6 +57,5 @@ export const useBook = (bookId: string | undefined) => {
     addReviewMutation.mutate(data);
   };
 
-  console.log(book, toggleLike, reviews, addReview, isBookLoading);
   return { book, toggleLike, reviews, addReview, isBookLoading };
 };

@@ -10,3 +10,4 @@ export { default as Empty } from './Empty';
 export { default as LikesButton } from './LikesButton';
 export { default as Loading } from './Loading';
 export { default as LazyImage } from './LazyImage';
+export { default as Modal } from './Modal';

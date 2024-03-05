@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { BookInfo } from 'pages/BookDetail';
 import QuantityBox from 'components/common/QuantityBox';
-import { Title, LikesButton, LazyImage } from 'components/common';
+import { Title, LikesButton, LazyImage, Modal } from 'components/common';
 import { AddToCartButton } from 'components/BookDetail';
 
 import { formatNumber } from 'utils/format';
@@ -19,6 +19,7 @@ interface BookDetailHeaderProps {
 const BookDetailHeader = ({ book, bookInfoList, toggleLike }: BookDetailHeaderProps) => {
   if (!book) return null;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [quantity, setQuantity] = useState<number>(1);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +32,20 @@ const BookDetailHeader = ({ book, bookInfoList, toggleLike }: BookDetailHeaderPr
     setQuantity(quantity - 1);
   };
 
+  const handleModalClose = () => setIsModalOpen(false);
+
   const { img, title, subTitle, liked, likes, price } = book;
   return (
     <DetailHeaderStyle>
-      <LazyImage src={getImgSrc(img)} alt={title} />
+      {isModalOpen && (
+        <Modal onClose={handleModalClose} isModalOpen={isModalOpen}>
+          <LazyImage src={getImgSrc(img)} alt={title} />
+        </Modal>
+      )}
+
+      <div className="book-img" onClick={() => setIsModalOpen(true)}>
+        <LazyImage src={getImgSrc(img)} alt={title} />
+      </div>
 
       <div className="info">
         <div className="title-wrapper">

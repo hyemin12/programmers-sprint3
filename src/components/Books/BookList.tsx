@@ -6,6 +6,7 @@ import { QUERYSTRING } from 'constance/querystring';
 import { IBook } from 'models/book.model';
 import { BookItem } from 'components/Books';
 import { ViewMode } from './BooksViewSwitcher';
+import { BestSellerBookItem } from 'components/Home';
 
 interface BooksListProps {
   list: IBook[];
@@ -32,7 +33,7 @@ const BooksList = ({ list }: BooksListProps) => {
   );
 };
 
-const BookListStyle = styled.div<{ view: ViewMode }>`
+export const BookListStyle = styled.div<{ view: ViewMode }>`
   display: grid;
   grid-template-columns: ${({ view }) => (view === 'grid' ? 'repeat(4, 1fr)' : 'repeat(1,1fr)')};
   gap: 24px;
