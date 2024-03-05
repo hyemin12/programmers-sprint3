@@ -10,10 +10,9 @@ import { BestSellerBookItem } from 'components/Home';
 
 interface BooksListProps {
   list: IBook[];
-  isBestseller?: boolean;
 }
 
-const BooksList = ({ list, isBestseller = false }: BooksListProps) => {
+const BooksList = ({ list }: BooksListProps) => {
   const [view, setView] = useState<ViewMode>('grid');
   const { search } = useLocation();
 
@@ -27,18 +26,14 @@ const BooksList = ({ list, isBestseller = false }: BooksListProps) => {
 
   return (
     <BookListStyle view={view}>
-      {list.map((item) =>
-        isBestseller ? (
-          <BestSellerBookItem book={item} key={item.id} />
-        ) : (
-          <BookItem book={item} key={item.id} view={view} />
-        ),
-      )}
+      {list.map((item) => (
+        <BookItem book={item} key={item.id} view={view} />
+      ))}
     </BookListStyle>
   );
 };
 
-const BookListStyle = styled.div<{ view: ViewMode }>`
+export const BookListStyle = styled.div<{ view: ViewMode }>`
   display: grid;
   grid-template-columns: ${({ view }) => (view === 'grid' ? 'repeat(4, 1fr)' : 'repeat(1,1fr)')};
   gap: 24px;

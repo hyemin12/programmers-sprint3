@@ -1,76 +1,62 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useCategory } from 'hooks/useCategory';
-import { VisualSlide } from 'components/Home';
+import { MainBookList, MainCategory, VisualSlide } from 'components/Home';
 import { Loading, Title } from 'components/common';
-import { fetchBooks } from 'api/book.api';
-import { LIMIT } from 'constance/pagination';
-import { IBook } from 'models/book.model';
-import { BookList } from 'components/Books';
-import useCartStore from 'store/cart.store';
-import useAuthStore from 'store/auth.store';
-import { useBooksInfinite } from 'hooks/useBooksInfinite';
+import { useMain } from 'hooks/useMain';
+import { useIntersectionObserver } from 'hooks/useIntersectionObserver';
 
 function Home() {
-  const [newBooks, setNewBooks] = useState<IBook[]>([]);
   const category = useCategory();
-  const { fetchCartItems } = useCartStore();
-  const { isLoggedIn } = useAuthStore();
-  const { bestSellerBooks, isFetching, fetchNextPage, hasNextPage } = useBooksInfinite();
-  console.log(bestSellerBooks, newBooks);
-  useEffect(() => {
-    fetchBooks({
-      category_id: undefined,
-      new: true,
-      page: 1,
-      limit: LIMIT,
-    }).then((res) => setNewBooks(res.list));
+  const { newBooks, isNewBooksEmpty, isBestSellerBooksEmpty, bestSellerBooks, isFetching, fetchNextPage, hasNextPage } =
+    useMain();
 
-    if (isLoggedIn) {
-      fetchCartItems();
+  const loadMore = () => {
+    if (!hasNextPage) return;
+    fetchNextPage();
+  };
+
+  // 무한 스크롤
+  const targetRef = useIntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      loadMore();
     }
-  }, []);
+  });
 
   return (
     <HomeStyle>
+      {/* 배너 */}
       <div className="visual">
         <VisualSlide />
       </div>
+
+      {/* 카테고리 */}
       <div className="category">
-        <ul>
-          {category.map((item) => {
-            if (item.id !== null) {
-              return (
-                <li key={item.id}>
-                  <Link to={`/books?category_id=${item.id}`}>{item.name}</Link>
-                </li>
-              );
-            }
-          })}
-        </ul>
+        <MainCategory category={category} />
       </div>
-      {isFetching && <Loading />}
-      {newBooks && (
+
+      {/* 신간안내 */}
+      {!isNewBooksEmpty && (
         <div className="new-books">
           <Title size="large" color="primary">
             신간 안내
           </Title>
-          <BookList list={newBooks} />
+          <MainBookList list={newBooks} />
         </div>
       )}
-      {bestSellerBooks && (
+
+      {/* 베스트 셀러 */}
+      {!isBestSellerBooksEmpty && (
         <div className="bestseller-books">
           <Title size="large" color="primary">
             인기 도서 안내
           </Title>
-          <BookList list={bestSellerBooks} isBestseller />
+          <MainBookList list={bestSellerBooks} isBestseller />
         </div>
       )}
-      <button className="more" disabled={!hasNextPage} onClick={() => fetchNextPage()}>
-        더보기
-      </button>
+      {isFetching && <Loading />}
+      <div ref={targetRef}></div>
     </HomeStyle>
   );
 }
@@ -78,27 +64,6 @@ const HomeStyle = styled.div`
   .visual {
     width: 100%;
     overflow: hidden;
-  }
-  .category {
-    ul {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      padding: 24px 0;
-      li {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 110px;
-        padding: 9px 12px;
-        border: 1px solid ${({ theme }) => theme.color.border};
-        border-radius: ${({ theme }) => theme.borderRadius.default};
-        list-style: none;
-        a {
-          text-decoration: none;
-        }
-      }
-    }
   }
 `;
 

@@ -1,3 +1,4 @@
+import { LIMIT } from 'constance/pagination';
 import { requestHandler } from './http';
 
 interface FetchBooksParams {
@@ -26,8 +27,8 @@ export const fetchBooks = async (params: FetchBooksParams) => {
     };
   }
 };
-export const fetchBestSeller = async () => {
-  return await requestHandler('get', `/books/best`);
+export const fetchBestSeller = async (page: number) => {
+  return await requestHandler('get', `/books/best`, { params: { page, limit: LIMIT } });
 };
 export const fetchBook = async (bookId: string) => {
   return await requestHandler('get', `/books/${bookId}`);
