@@ -38,7 +38,12 @@ export const BookStyle = styled.div`
   .filter {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0%;
+    padding: 20px 0;
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    .filter {
+      padding: 0;
+    }
   }
 `;
 

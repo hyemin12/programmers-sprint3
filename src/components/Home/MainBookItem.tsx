@@ -6,12 +6,12 @@ import { formatNumber } from 'utils/format';
 import { getImgSrc } from 'utils/image';
 import { BooksItemStyle } from 'components/Books/BookItem/BookItem.styles';
 
-interface BestSellerBookItemProps {
+interface MainBookItemProps {
   book: IBook;
-  rank: number;
+  rank?: number;
 }
 
-const BestSellerBookItem = ({ rank, book }: BestSellerBookItemProps) => {
+const MainBookItem = ({ rank, book }: MainBookItemProps) => {
   if (!book) return null;
   const { id, title, img, author, price } = book;
   return (
@@ -22,7 +22,7 @@ const BestSellerBookItem = ({ rank, book }: BestSellerBookItemProps) => {
         </div>
 
         <div className="content">
-          <RankStyle>{rank}</RankStyle>
+          {rank && <RankStyle>{rank}</RankStyle>}
           <h2 className="title">
             <EllipsisBox line={2}>{title}</EllipsisBox>
           </h2>
@@ -52,4 +52,4 @@ const RankStyle = styled.div`
   line-height: 2;
 `;
 
-export default BestSellerBookItem;
+export default MainBookItem;

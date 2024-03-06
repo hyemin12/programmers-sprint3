@@ -40,6 +40,10 @@ const MainCategoryStyle = styled.ul`
       text-decoration: none;
     }
   }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    flex-wrap: wrap;
+    padding: 12px 0;
+  }
 `;
 
 export default MainCategory;

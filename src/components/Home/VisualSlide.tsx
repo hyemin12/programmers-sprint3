@@ -59,6 +59,23 @@ const VisualSlideStyle = styled.div`
       right: 25px;
     }
   }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    height: 30vh;
+    .slick-slider {
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .slick-prev {
+        left: 15px;
+      }
+      .slick-next {
+        right: 15px;
+      }
+    }
+  }
 `;
 
 export default VisualSlide;

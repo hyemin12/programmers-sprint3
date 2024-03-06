@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 const ThemeSwitcher = () => {
   const { themeName, toggleTheme } = useContext(ThemeContext);
   return (
-    <ThemeSwitcherStyle themeName={themeName}>
+    <ThemeSwitcherStyle themeName={themeName} className="theme-switcher">
       <input type="checkbox" id="theme-toggle" className="toggle-checkbox" onChange={() => {}} />
       <label htmlFor="theme-toggle" onClick={toggleTheme}>
         <span className="ball"></span>

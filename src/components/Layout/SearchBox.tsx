@@ -31,7 +31,7 @@ const SearchBox = () => {
   };
 
   return (
-    <SearchBoxStyle>
+    <SearchBoxStyle className="search-box">
       <form onSubmit={handleSearchBook}>
         <input
           type="text"
@@ -68,6 +68,11 @@ const SearchBoxStyle = styled.div`
       svg {
         fill: ${({ theme }) => theme.color.primary};
       }
+    }
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    form {
+      width: calc(100vw - 24px);
     }
   }
 `;

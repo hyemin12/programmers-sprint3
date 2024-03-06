@@ -1,8 +1,7 @@
 import { BookListStyle } from 'components/Books/BookList';
-import BestSellerBookItem from './BestSellerBookItem';
 import { IBook } from 'models/book.model';
-import { BookItem } from 'components/Books';
 import { Title } from 'components/common';
+import MainBookItem from './MainBookItem';
 
 interface BooksListProps {
   list: IBook[];
@@ -14,18 +13,20 @@ interface BooksListProps {
 const MainBooksList = ({ list, title, $className, isBestseller = false }: BooksListProps) => {
   const view = 'grid';
   return (
-    <BookListStyle view={view} className={$className}>
+    <div className={$className + ' main-contents'}>
       <Title size="large" color="primary">
         {title}
       </Title>
-      {list.map((item, idx) =>
-        isBestseller ? (
-          <BestSellerBookItem book={item} key={item.id} rank={idx + 1} />
-        ) : (
-          <BookItem book={item} key={item.id} view={view} />
-        ),
-      )}
-    </BookListStyle>
+      <BookListStyle view={view}>
+        {list.map((item, idx) =>
+          isBestseller ? (
+            <MainBookItem book={item} key={item.id} rank={idx + 1} />
+          ) : (
+            <MainBookItem book={item} key={item.id} />
+          ),
+        )}
+      </BookListStyle>
+    </div>
   );
 };
 

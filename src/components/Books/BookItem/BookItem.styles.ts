@@ -24,6 +24,7 @@ export const BooksItemStyle = styled.div<{ view: ViewMode }>`
       max-width: 100%;
     }
   }
+
   .content {
     flex: ${({ view }) => (view === 'grid' ? 0 : 1)};
     padding-left: ${({ view }) => (view === 'grid' ? 0 : '16px')};
@@ -48,6 +49,22 @@ export const BooksItemStyle = styled.div<{ view: ViewMode }>`
         color: ${({ theme }) => theme.color.text};
         font-size: 1rem;
         font-weight: bold;
+      }
+    }
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    a {
+      border-bottom: ${({ view, theme }) => view === 'list' && `1px solid ${theme.color.border}`};
+
+      padding-bottom: ${({ view }) => (view === 'list' ? '24px' : '12px')};
+      .img {
+        width: ${({ view }) => (view === 'grid' ? 'auto' : '135px')};
+      }
+      .content {
+        margin-top: 4px;
+      }
+      .likes {
+        display: none;
       }
     }
   }

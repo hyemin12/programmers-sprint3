@@ -33,7 +33,7 @@ const BooksFilter = () => {
 
   return (
     <BooksFilterStyle>
-      <div className="category">
+      <div className="category-desktop">
         {category.map((item) => (
           <Button
             size="medium"
@@ -44,6 +44,15 @@ const BooksFilter = () => {
             {item.name}
           </Button>
         ))}
+      </div>
+      <div className="category-mobile">
+        <select>
+          {category.map((item) => (
+            <option key={item.id} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="new">
         <Button size="medium" scheme={searchParams.get('news') ? 'primary' : 'default'} onClick={() => handleNews()}>
@@ -57,9 +66,23 @@ const BooksFilter = () => {
 const BooksFilterStyle = styled.div`
   display: flex;
   gap: 24px;
-  .category {
+  .category-desktop {
     display: flex;
     gap: 8px;
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    .category-desktop {
+      display: none;
+    }
+    .category-mobile {
+      height: 100%;
+      select {
+        height: 100%;
+        padding: 0 12px;
+        border-color: ${({ theme }) => theme.color.border};
+        border-radius: ${({ theme }) => theme.borderRadius.default};
+      }
+    }
   }
 `;
 

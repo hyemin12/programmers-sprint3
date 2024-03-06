@@ -6,11 +6,14 @@ import { MainBookList, MainCategory, VisualSlide } from 'components/Home';
 import { Loading, Title } from 'components/common';
 import { useMain } from 'hooks/useMain';
 import { useIntersectionObserver } from 'hooks/useIntersectionObserver';
+import { useMediaQuery } from 'hooks/useMediaQuery';
 
 function Home() {
   const category = useCategory();
   const { newBooks, isNewBooksEmpty, isBestSellerBooksEmpty, bestSellerBooks, isFetching, fetchNextPage, hasNextPage } =
     useMain();
+  const { isMobile } = useMediaQuery();
+  console.log(isMobile);
 
   const loadMore = () => {
     if (!hasNextPage) return;
@@ -37,11 +40,7 @@ function Home() {
       </div>
 
       {/* 신간안내 */}
-      {!isNewBooksEmpty && (
-        <div className="new-books">
-          <MainBookList list={newBooks} title="신간 안내" $className="new-books" />
-        </div>
-      )}
+      {!isNewBooksEmpty && <MainBookList list={newBooks} title="신간 안내" $className="new-books" />}
 
       {/* 베스트 셀러 */}
       {!isBestSellerBooksEmpty && (
@@ -56,6 +55,9 @@ const HomeStyle = styled.div`
   .visual {
     width: 100%;
     overflow: hidden;
+  }
+  .main-contents {
+    padding-bottom: 30px;
   }
 `;
 
