@@ -41,6 +41,15 @@ export const DetailHeaderStyle = styled.header`
       }
     }
   }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    display: block;
+    .title-wrapper {
+      margin-bottom: 12px;
+      h1 {
+        margin-bottom: 6px;
+      }
+    }
+  }
 `;
 
 export const QuantityBoxStyle = styled.div`
