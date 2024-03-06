@@ -25,6 +25,7 @@ const MainCategory = ({ category }: MainCategoryProps) => {
 const MainCategoryStyle = styled.ul`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 6px;
   padding: 24px 0;
   li {
@@ -41,7 +42,6 @@ const MainCategoryStyle = styled.ul`
     }
   }
   @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
-    flex-wrap: wrap;
     padding: 12px 0;
   }
 `;

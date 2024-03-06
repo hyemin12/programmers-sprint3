@@ -40,7 +40,8 @@ export const BookStyle = styled.div`
     justify-content: space-between;
     padding: 20px 0;
   }
-  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
     .filter {
       padding: 0;
     }

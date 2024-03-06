@@ -48,6 +48,7 @@ const SearchBox = () => {
   );
 };
 const SearchBoxStyle = styled.div`
+  width: 100%;
   form {
     width: 400px;
     position: relative;
@@ -68,6 +69,11 @@ const SearchBoxStyle = styled.div`
       svg {
         fill: ${({ theme }) => theme.color.primary};
       }
+    }
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
+    form {
+      width: 100%;
     }
   }
   @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {

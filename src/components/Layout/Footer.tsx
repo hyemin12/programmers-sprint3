@@ -26,7 +26,7 @@ const FooterStyle = styled.footer`
     font-size: 0.75em;
     color: ${({ theme }) => theme.color.text};
   }
-  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
     padding: 20px 12px;
   }
 `;

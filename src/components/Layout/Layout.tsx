@@ -18,7 +18,7 @@ const LayoutStyle = styled.main`
   max-width: ${({ theme }) => theme.layout.width.large};
   margin: 0 auto;
   padding: 20px 0;
-  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
     padding: 24px 12px;
   }
 `;

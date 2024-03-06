@@ -43,31 +43,48 @@ const VisualSlideStyle = styled.div`
   overflow: hidden;
   position: relative;
   .slick-slider {
+    width: 100%;
     height: 100%;
-    img {
-      width: 100%;
-      object-fit: cover;
+    .slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 55vh;
+      img {
+        width: auto;
+        height: 100%;
+      }
+
+      .slick-prev {
+        left: 25px;
+        z-index: 9;
+      }
+      .slick-next {
+        right: 25px;
+        z-index: 9;
+      }
     }
-    .slick-prev,
-    .slick-next {
-      z-index: 9;
+    .slick-dots {
+      bottom: 10px;
+      li.slick-active button::before {
+        color: #fff;
+      }
     }
-    .slick-prev {
-      left: 25px;
-    }
-    .slick-next {
-      right: 25px;
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
+    height: 40vh;
+    .slick-slider {
+      .slick-prev {
+        left: 15px;
+      }
+      .slick-next {
+        right: 15px;
+      }
     }
   }
   @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
     height: 30vh;
     .slick-slider {
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
       .slick-prev {
         left: 15px;
       }

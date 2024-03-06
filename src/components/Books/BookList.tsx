@@ -36,6 +36,9 @@ export const BookListStyle = styled.div<{ view: ViewMode }>`
   display: grid;
   grid-template-columns: ${({ view }) => (view === 'grid' ? 'repeat(4, 1fr)' : 'repeat(1,1fr)')};
   gap: 24px;
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
+    grid-template-columns: ${({ view }) => (view === 'grid' ? 'repeat(3, 1fr)' : 'repeat(1,1fr)')};
+  }
   @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
     grid-template-columns: ${({ view }) => (view === 'grid' ? 'repeat(2, 1fr)' : 'repeat(1,1fr)')};
   }

@@ -19,13 +19,14 @@ export const HeaderContainer = styled.div`
       display: flex;
       align-items: center;
       gap: 28px;
+      width: 100%;
     }
     &.header-mobile {
       display: none;
     }
   }
 
-  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
     padding: 0 12px;
     .theme-switcher {
       display: none;
@@ -43,8 +44,8 @@ export const HeaderContainer = styled.div`
         display: flex;
         justify-content: center;
         position: relative;
+        margin-bottom: 20px;
         .logo {
-          margin-bottom: 12px;
           img {
             width: 160px;
           }

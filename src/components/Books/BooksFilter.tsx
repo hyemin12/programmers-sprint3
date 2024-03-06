@@ -4,10 +4,16 @@ import styled from 'styled-components';
 import { QUERYSTRING } from 'constance/querystring';
 import { Button } from 'components/common';
 import { useCategory } from 'hooks/useCategory';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 const BooksFilter = () => {
   const category = useCategory();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const onChangeCategory = (e: ChangeEvent<HTMLSelectElement>) => {
+    const currentValue = e.target.value;
+    handleCategory(currentValue === undefined ? null : Number(currentValue));
+  };
 
   const handleCategory = (id: number | null) => {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -34,22 +40,17 @@ const BooksFilter = () => {
   return (
     <BooksFilterStyle>
       <div className="category-desktop">
-        {category.map((item) => (
-          <Button
-            size="medium"
-            scheme={item.isActive ? 'primary' : 'default'}
-            key={item.id}
-            onClick={() => handleCategory(item.id)}
-          >
-            {item.name}
+        {category.map(({ id, name, isActive }) => (
+          <Button size="medium" scheme={isActive ? 'primary' : 'default'} key={id} onClick={() => handleCategory(id)}>
+            {name}
           </Button>
         ))}
       </div>
       <div className="category-mobile">
-        <select>
-          {category.map((item) => (
-            <option key={item.id} value={item.name}>
-              {item.name}
+        <select onChange={onChangeCategory} value={category.find((item) => item.isActive)?.id?.toString()}>
+          {category.map(({ id, name }) => (
+            <option key={id} value={id?.toString()}>
+              {name}
             </option>
           ))}
         </select>
@@ -70,11 +71,17 @@ const BooksFilterStyle = styled.div`
     display: flex;
     gap: 8px;
   }
-  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+  .category-mobile {
+    display: none;
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
+    flex: 1;
+    justify-content: space-between;
     .category-desktop {
       display: none;
     }
     .category-mobile {
+      display: block;
       height: 100%;
       select {
         height: 100%;
@@ -83,6 +90,12 @@ const BooksFilterStyle = styled.div`
         border-radius: ${({ theme }) => theme.borderRadius.default};
       }
     }
+    .new {
+      margin-right: 12px;
+    }
+  }
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    padding: 0;
   }
 `;
 

@@ -13,7 +13,6 @@ function Home() {
   const { newBooks, isNewBooksEmpty, isBestSellerBooksEmpty, bestSellerBooks, isFetching, fetchNextPage, hasNextPage } =
     useMain();
   const { isMobile } = useMediaQuery();
-  console.log(isMobile);
 
   const loadMore = () => {
     if (!hasNextPage) return;
@@ -58,6 +57,10 @@ const HomeStyle = styled.div`
   }
   .main-contents {
     padding-bottom: 30px;
+  }
+
+  @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
+    padding: 0 0 30px 0;
   }
 `;
 
