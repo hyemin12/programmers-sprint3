@@ -39,21 +39,13 @@ function Home() {
       {/* 신간안내 */}
       {!isNewBooksEmpty && (
         <div className="new-books">
-          <Title size="large" color="primary">
-            신간 안내
-          </Title>
-          <MainBookList list={newBooks} />
+          <MainBookList list={newBooks} title="신간 안내" $className="new-books" />
         </div>
       )}
 
       {/* 베스트 셀러 */}
       {!isBestSellerBooksEmpty && (
-        <div className="bestseller-books">
-          <Title size="large" color="primary">
-            인기 도서 안내
-          </Title>
-          <MainBookList list={bestSellerBooks} isBestseller />
-        </div>
+        <MainBookList list={bestSellerBooks} isBestseller title="인기도서 안내" $className="bestseller-books" />
       )}
       {isFetching && <Loading />}
       <div ref={targetRef}></div>
