@@ -10,7 +10,12 @@ export interface FieldsetProps {
 const EmailFieldset = ({ register, errors }: FieldsetProps) => {
   return (
     <fieldset>
-      <InputText placeholder="이메일을 입력하세요" inputType="email" {...register('email', { required: true })} />
+      <InputText
+        placeholder="이메일을 입력하세요"
+        inputType="email"
+        {...register('email', { required: true })}
+        inputMode="email"
+      />
       {errors.email && <p className="error-text">이메일은 필수로 입력해야합니다.</p>}
     </fieldset>
   );
