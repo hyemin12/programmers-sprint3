@@ -3,7 +3,7 @@ import { FaBars } from 'react-icons/fa';
 import { Button, Logo, ThemeSwitcher } from 'components/common';
 import AuthNav from './AuthNav';
 import SearchBox from './SearchBox';
-import { HeaderContainer } from 'components/Layout/Header.styles';
+import { HeaderContainer } from 'components/Header/Header.styles';
 
 const Header = () => {
   const [isShowMenuBar, setIsShowMenuBar] = useState(false);

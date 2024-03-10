@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 
-import { AuthNavStyle } from 'components/Layout/AuthNav.styles';
 import { PreviewCart } from 'components/Cart';
 import useAuthStore from 'store/auth.store';
 import useCartStore from 'store/cart.store';
 import { useAuth } from 'hooks/useAuth';
+import { AuthNavStyle } from './AuthNav.styles';
 
 const AuthNav = () => {
   const { isLoggedIn } = useAuthStore();

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { SignUp, ResetPassword, Login, Books, SearchBooks, Cart, BookDetail, Order, OrderList, Home } from 'pages';
 import RouteError from './components/RouteError';
-import { GeneralLayout } from 'components/Layout';
+import GeneralLayout from 'layout/Layout';
 
 const routerData = [
   {
