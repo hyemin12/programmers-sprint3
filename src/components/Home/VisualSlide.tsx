@@ -46,23 +46,20 @@ const VisualSlideStyle = styled.div`
     width: 100%;
     height: 100%;
     .slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 55vh;
+      height: 100%;
       img {
-        width: auto;
-        height: 100%;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
       }
-
-      .slick-prev {
-        left: 25px;
-        z-index: 9;
-      }
-      .slick-next {
-        right: 25px;
-        z-index: 9;
-      }
+    }
+    button.slick-prev {
+      left: 25px;
+      z-index: 9;
+    }
+    button.slick-next {
+      right: 25px;
+      z-index: 9;
     }
     .slick-dots {
       bottom: 10px;
@@ -73,24 +70,27 @@ const VisualSlideStyle = styled.div`
   }
   @media screen and (${({ theme }) => theme.mediaQuery.tablet}) {
     height: 40vh;
-    .slick-slider {
-      .slick-prev {
-        left: 15px;
-      }
-      .slick-next {
-        right: 15px;
-      }
+
+    button.slick-prev {
+      left: 15px;
+    }
+    button.slick-next {
+      right: 15px;
     }
   }
   @media screen and (${({ theme }) => theme.mediaQuery.mobile}) {
     height: 30vh;
     .slick-slider {
-      .slick-prev {
-        left: 15px;
+      img {
+        width: auto;
+        height: 100%;
       }
-      .slick-next {
-        right: 15px;
-      }
+    }
+    button.slick-prev {
+      left: 15px;
+    }
+    button.slick-next {
+      right: 15px;
     }
   }
 `;

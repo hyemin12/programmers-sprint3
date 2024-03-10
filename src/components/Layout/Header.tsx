@@ -16,8 +16,9 @@ const Header = () => {
           <Logo type="link" size={200} />
           <SearchBox />
         </div>
-
-        <AuthNav />
+        <div className="menu-wrapper">
+          <AuthNav />
+        </div>
       </header>
 
       {/* 모바일 버전 헤더 */}

@@ -21,6 +21,9 @@ export const HeaderContainer = styled.div`
       gap: 28px;
       width: 100%;
     }
+    .menu-wrapper {
+      flex-shrink: 0;
+    }
     &.header-mobile {
       display: none;
     }
