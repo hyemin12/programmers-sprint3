@@ -13,7 +13,9 @@ const AuthNav = () => {
   const { userLogout } = useAuth();
   const { cartItems, fetchCartItems, isEmpty } = useCartStore();
   useEffect(() => {
-    fetchCartItems();
+    if (isLoggedIn) {
+      fetchCartItems();
+    }
   }, []);
   return (
     <AuthNavStyle>
