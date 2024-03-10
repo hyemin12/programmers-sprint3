@@ -40,6 +40,7 @@ export const BooksItemStyle = styled.div<{ view: ViewMode }>`
     }
     .summary {
       margin-bottom: 7px;
+      margin-right: 60px;
     }
 
     .price {
