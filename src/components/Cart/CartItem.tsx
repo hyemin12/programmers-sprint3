@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 
 import CheckIconButton from './CheckIconButton';
-import { Title, QuantityBox } from 'components/common';
+import { Title, QuantityBox, Price } from 'components/common';
 import { ICart } from 'models/cart.model';
 import { formatNumber } from 'utils/format';
 import { updateQuantity } from 'api/carts.api';
@@ -68,12 +68,12 @@ const CartItem = ({ cart }: CartItemProps) => {
               </Title>
             </Link>
 
-            <p className="price">{formatNumber(price)}원</p>
+            <Price size="default" price={price} />
           </div>
         </div>
         {/* 제품 수량*/}
         <div className="price-quantity-wrapper">
-          <p className="total-price">{formatNumber(price * quantity)}원</p>
+          <Price size="default" price={price * quantity} />
           <QuantityBox
             quantity={itemQuantity}
             handleOnchange={onChangeQuantity}
