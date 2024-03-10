@@ -37,6 +37,19 @@ export const AuthNavStyle = styled.nav`
           margin-right: 6px;
         }
       }
+      &.nav-cart {
+        .preview-cart {
+          opacity: 0;
+          visibility: hidden;
+          transition:
+            opacity 0.2s ease-in-out,
+            visibility 0.2s ease-in-out;
+        }
+        &:hover .preview-cart {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
     }
     .cart-isExist {
       display: flex;

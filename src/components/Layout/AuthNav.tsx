@@ -1,24 +1,29 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 
-import useAuthStore from 'store/auth.store';
 import { AuthNavStyle } from 'components/Layout/AuthNav.styles';
+import { PreviewCart } from 'components/Cart';
+import useAuthStore from 'store/auth.store';
 import useCartStore from 'store/cart.store';
 import { useAuth } from 'hooks/useAuth';
 
 const AuthNav = () => {
   const { isLoggedIn } = useAuthStore();
   const { userLogout } = useAuth();
-  const { cartItems } = useCartStore();
-
+  const { cartItems, fetchCartItems, isEmpty } = useCartStore();
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
   return (
     <AuthNavStyle>
       <ul>
         {isLoggedIn && (
           <>
-            <li>
+            <li className="nav-cart">
               <Link to="/cart">장바구니</Link>
-              {cartItems.length > 0 && <span className="cart-isExist">{cartItems.length}</span>}
+              {!isEmpty && <span className="cart-isExist">{cartItems.length}</span>}
+              <PreviewCart />
             </li>
             <li>
               <Link to="/orderlist">주문내역</Link>
