@@ -24,7 +24,13 @@ export const createClient = (config?: AxiosRequestConfig) => {
       console.log(error);
 
       // 로그인 만료 처리
-      if (error.response.statusText === 'Unauthorized') {
+      const errorCode = error?.response?.data?.error?.code;
+      if (
+        errorCode === 'ER_SESSION_EXPIRED' ||
+        errorCode === 'ER_INVALID_TOKEN' ||
+        errorCode === 'ER_NO_TOKEN' ||
+        errorCode === 'ER_INVALID_ISSUER'
+      ) {
         removeToken();
         window.location.href = '/login';
         return;
