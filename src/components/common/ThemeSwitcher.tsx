@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 const ThemeSwitcher = () => {
   const { themeName, toggleTheme } = useContext(ThemeContext);
   return (
-    <ThemeSwitcherStyle themeName={themeName} className="theme-switcher">
+    <ThemeSwitcherStyle $themename={themeName} className="theme-switcher">
       <input type="checkbox" id="theme-toggle" className="toggle-checkbox" onChange={() => {}} />
       <label htmlFor="theme-toggle" onClick={toggleTheme}>
         <span className="ball"></span>
@@ -24,7 +24,7 @@ const DarkTheme = css`
   }
 `;
 
-const ThemeSwitcherStyle = styled.div<{ themeName: ThemeName }>`
+const ThemeSwitcherStyle = styled.div<{ $themename: ThemeName }>`
   input {
     opacity: 0;
     position: absolute;
@@ -51,7 +51,7 @@ const ThemeSwitcherStyle = styled.div<{ themeName: ThemeName }>`
       transition: transform 0.2s linear;
     }
   }
-  ${({ themeName }) => themeName === 'dark' && DarkTheme};
+  ${({ $themename }) => $themename === 'dark' && DarkTheme};
 `;
 
 export default ThemeSwitcher;
