@@ -96,7 +96,9 @@ const Cart = () => {
 
       <CartStyle>
         {cartItems.length === 0 ? (
-          <Empty icon={<FaShoppingCart />} title="장바구니가 비어있습니다." />
+          <div className="cart-empty">
+            <Empty icon={<FaShoppingCart />} title="장바구니가 비어있습니다." />
+          </div>
         ) : (
           <>
             <div className="content">
@@ -104,15 +106,14 @@ const Cart = () => {
                 <CartItem cart={item} key={item.id} />
               ))}
             </div>
-            <div className="summary"></div>
+            <div className="summary">
+              <CartSummary totalQuantity={totalQuantity} totalPrice={totalPrice} />
+              <Button size="large" scheme="primary" onClick={handlerOrder}>
+                주문하기
+              </Button>
+            </div>
           </>
         )}
-        <div className="summary">
-          <CartSummary totalQuantity={totalQuantity} totalPrice={totalPrice} />
-          <Button size="large" scheme="primary" onClick={handlerOrder}>
-            주문하기
-          </Button>
-        </div>
       </CartStyle>
     </>
   );
@@ -138,6 +139,9 @@ export const CartStyle = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  .cart-empty {
+    width: 100%;
+  }
   .content {
     flex-grow: 1;
   }
