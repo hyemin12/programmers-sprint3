@@ -45,7 +45,7 @@ npm run start
 
 ### 무한 스크롤로 인기 도서 목록 가져오기
 
-![https://blog.kakaocdn.net/dn/bRUB6l/btsFD3XMzx9/zC1AxMN3Kd0f463k2wcuJK/img.gif](https://blog.kakaocdn.net/dn/bRUB6l/btsFD3XMzx9/zC1AxMN3Kd0f463k2wcuJK/img.gif)
+![https://blog.kakaocdn.net/dn/bRUB6l/btsFD3XMzx9/zC1AxMN3Kd0f463k2wcuJK/img.gifart](https://blog.kakaocdn.net/dn/bRUB6l/btsFD3XMzx9/zC1AxMN3Kd0f463k2wcuJK/img.gif)
 
 ### 검색 기능
 
