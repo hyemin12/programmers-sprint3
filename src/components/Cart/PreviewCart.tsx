@@ -1,17 +1,21 @@
 import { Title } from 'components/common';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useCartStore from 'store/cart.store';
 import styled from 'styled-components';
 import PreviewCartItem from './PreviewCartItem';
 import Price from 'components/common/Price';
 
 const PreviewCart = () => {
-  const { cartItems, isEmpty } = useCartStore();
+  const { cartItems, isEmpty, fetchCartItems } = useCartStore();
   const totalQuantity = cartItems.reduce((acc, cart) => (acc += cart.quantity), 0);
   const totalPrice = cartItems.reduce((acc, cart) => (acc += cart.price * cart.quantity), 0);
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
   return (
     <PreviewCartStyle className="preview-cart">
-      {isEmpty && <p>장바구니가 비어있습니다.</p>}
+      {isEmpty && <p className="preview-cart-empty">장바구니가 비어있습니다.</p>}
       <div className="cart-items">
         {cartItems.map((item) => (
           <PreviewCartItem key={item.id} item={item} />
@@ -38,6 +42,9 @@ const PreviewCartStyle = styled.div`
   z-index: 10;
   top: 24px;
   right: -20px;
+  .preview-cart-empty {
+    padding: 20px 0;
+  }
   .cart-items {
     display: flex;
     flex-direction: column;

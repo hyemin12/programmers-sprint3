@@ -10,11 +10,14 @@ import FindAddress from '../components/Order/FindAddress';
 import { order } from 'api/order.api';
 import { IDelivery, IOrderSheet } from 'models/order.model';
 import { useAlert } from 'hooks/useAlert';
+import { PaymentMethodItem } from 'components/Order';
 
-interface IDeliveryForm extends IDelivery {
+export interface IDeliveryForm extends IDelivery {
   addressDetail: string;
   payment: string;
 }
+
+const paymentMethods = ['신용카드', '무통장입금', '네이버페이', '카카오페이'];
 
 const Order = () => {
   const location = useLocation();
@@ -49,7 +52,6 @@ const Order = () => {
       });
     });
   };
-
   return (
     <>
       <Title size="large">주문서 작성</Title>
@@ -70,10 +72,19 @@ const Order = () => {
               <fieldset>
                 <label>전화번호</label>
                 <div className="input">
-                  <InputText type="text" {...register('contact', { required: true })} />
+                  <InputText
+                    type="text"
+                    {...register('contact', {
+                      required: true,
+                      pattern: {
+                        value: /^\d{2,3}-\d{3,4}-\d{4}$/,
+                        message: '올바른 전화번호 형식이 아닙니다.',
+                      },
+                    })}
+                  />
                 </div>
               </fieldset>
-              {errors.contact && <p className="error-text">전화번호를 입력해주세요.</p>}
+              {errors.contact && <p className="error-text">{errors.contact.message ?? '전화번호를 입력해주세요.'}</p>}
               <fieldset>
                 <label>주소</label>
                 <div className="input">
@@ -89,10 +100,13 @@ const Order = () => {
                 </div>
               </fieldset>
               {errors.addressDetail && <p className="error-text">상세 주소를 입력해주세요.</p>}
-              <fieldset>
-                <label>결제수단</label>
-                <div className="input">
-                  <InputText type="text" {...register('payment', { required: true })} />
+              <fieldset className="payment-method-fieldset">
+                <p>결제수단</p>
+
+                <div>
+                  {paymentMethods.map((item) => (
+                    <PaymentMethodItem register={register} value={item} key={item} />
+                  ))}
                 </div>
               </fieldset>
               {errors.payment && <p className="error-text">결제 수단을 선택해주세요.</p>}
@@ -123,7 +137,6 @@ const OrderStyle = styled(CartStyle)`
   .order-info,
   .order-form {
     padding: 12px 0;
-    border-top: 1px solid ${({ theme }) => theme.color.border};
     border-bottom: 1px solid ${({ theme }) => theme.color.border};
     h1 {
       margin-bottom: 24px;
@@ -142,7 +155,7 @@ const OrderStyle = styled(CartStyle)`
       gap: 8px;
       padding: 0 0 12px 0;
       border: none;
-      label {
+      > label {
         width: 80px;
       }
       .input {
@@ -151,6 +164,16 @@ const OrderStyle = styled(CartStyle)`
           width: 100%;
         }
       }
+    }
+  }
+  .payment-method-fieldset {
+    display: flex;
+    p {
+      width: 80px;
+    }
+    > div {
+      display: flex;
+      gap: 8px;
     }
   }
 `;

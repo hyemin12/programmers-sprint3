@@ -53,7 +53,7 @@ const useCartStore = create<CartStoreState>()(
           try {
             const cartId = idArr[0];
             await deleteCart({ cartId, idArr });
-            set(() => ({ cartItems: [] }));
+            set(() => ({ cartItems: [], isEmpty: true }));
           } catch (error) {
             console.error('장바구니 아이템을 삭제하는 중에 오류가 발생했습니다.', error);
           }
@@ -67,6 +67,7 @@ const useCartStore = create<CartStoreState>()(
             const cartItem = { ...newItem, id: response.id };
             set((state) => ({
               cartItems: addItemToCart(state.cartItems, cartItem),
+              isEmpty: false,
             }));
           } catch (error) {
             console.error('장바구니에 아이템을 추가하는 중에 오류가 발생했습니다.', error);
