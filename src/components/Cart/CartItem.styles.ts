@@ -19,7 +19,7 @@ export const CartItemStyle = styled.div`
       align-items: start;
       padding: 24px 24px 24px 12px;
       .product {
-        min-width: 30vw;
+        width: 35vw;
       }
     }
   }
