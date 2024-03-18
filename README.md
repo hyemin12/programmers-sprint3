@@ -66,4 +66,13 @@ npm run start
 ### 로그인이 필요한 경우
 
 - 로그인이 필요한 경우에는 알람창을 띄우고 로그인 페이지로 이동
-  ![requiredLogin](https://github.com/hyemin12/programmers-sprint3/assets/66300732/f77f9bff-cdd7-43d2-b32f-ed3847329285)
+
+![requiredLogin](https://github.com/hyemin12/programmers-sprint3/assets/66300732/f77f9bff-cdd7-43d2-b32f-ed3847329285)
+
+### 주문하기
+
+![order](https://github.com/hyemin12/programmers-sprint3/assets/66300732/fbae843d-15e5-4bfb-95fa-8d1abd0e613d)
+
+### 주문내역
+
+![orderlist](https://github.com/hyemin12/programmers-sprint3/assets/66300732/cce19e95-23e9-457a-9b98-e57afab7faaa)
