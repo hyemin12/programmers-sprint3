@@ -66,7 +66,7 @@ const Cart = () => {
       book_id: item.book_id,
     }));
 
-    const orderData: Omit<Omit<IOrderSheet, 'delivery'>, 'payment'> = {
+    const orderData: Omit<IOrderSheet, 'delivery' | 'payment'> = {
       books: formatOrderBooks,
       total_price: totalPrice,
       total_quantity: totalQuantity,

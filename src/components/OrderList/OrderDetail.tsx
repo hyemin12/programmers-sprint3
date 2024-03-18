@@ -3,22 +3,19 @@ import { formatNumber } from 'utils/format';
 
 interface OrderDetailProps {
   detail: IOrderDetail;
-  index: number;
 }
 
-const OrderDetail = ({ detail, index }: OrderDetailProps) => {
+const OrderDetail = ({ detail }: OrderDetailProps) => {
   if (!detail) return null;
   const { book_title, author, quantity, price } = detail;
   return (
     <tr>
-      <td></td>
-      <td>주문내역{index}</td>
-      <td colSpan={2}>{book_title}</td>
-      <td>{author}</td>
-      <td>{formatNumber(price)}원</td>
-      <td>{quantity}권</td>
+      <td className="td-product">
+        <p>{book_title}</p>
+        <span className="author">{author}</span>
+      </td>
+      <td>{quantity}</td>
       <td>{formatNumber(price * quantity)}원</td>
-      <td colSpan={2}></td>
     </tr>
   );
 };

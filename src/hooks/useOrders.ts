@@ -11,13 +11,14 @@ export const useOrders = () => {
   }, []);
 
   const selectOrderItem = (orderId: number) => {
+    console.log(orderId);
     if (orders.find((item) => item.id === orderId)?.detail) {
       setSelectedItemId(orderId);
       return;
     }
     fetchOrder(orderId).then((res) => {
-      setSelectedItemId(orderId);
-      setOrders(
+      console.log(
+        res,
         orders.map((item) => {
           if (item.id === orderId) {
             return { ...item, detail: res };
@@ -25,8 +26,19 @@ export const useOrders = () => {
           return item;
         }),
       );
+      setSelectedItemId(orderId);
+      const cpOrders = [...orders];
+      setOrders(
+        cpOrders.map((item) => {
+          if (item.id === orderId) {
+            console.log('일치!');
+            return { ...item, detail: res };
+          }
+          return item;
+        }),
+      );
     });
   };
-
+  console.log(orders);
   return { orders, selectedItemId, selectOrderItem };
 };
